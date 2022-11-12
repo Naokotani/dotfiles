@@ -15,7 +15,16 @@
 
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 (column-number-mode)
-(global-display-line-numbers-mode t)
+
+;; Enable line numbers for some modes
+(dolist (mode '(text-mode-hook
+                prog-mode-hook
+                conf-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 1))))
+
+;; Override some modes which derive from the above
+(dolist (mode '(org-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;;Setup auto saves
 
@@ -443,6 +452,11 @@
 (setq-default tab-width 4)
 (add-hook 'js-mode-hook (lambda () (setq tab-width 2)))
 
+(use-package emmet-mode
+  :hook ((sgml-mode . emmet-mode)
+		(css-mode . emmet-mode)
+		(js-mode . emmet-mode)))
+
 ;;; Org Mode
 
 ;;Basic defaults
@@ -497,7 +511,6 @@
 
 
 ;; Org Roam
-
 (use-package org-roam
   :ensure t
   :demand t  ;; Ensure org-roam is loaded by default
@@ -512,7 +525,6 @@
          ("C-c n I" . org-roam-node-insert-immediate)
          ("C-c n p" . my/org-roam-find-project)
          ("C-c n t" . my/org-roam-capture-task)
-         ("C-c n b" . my/org-roam-capture-inbox)
          :map org-mode-map
          ("C-M-i" . completion-at-point)
          :map org-roam-dailies-map
@@ -569,16 +581,11 @@ capture was not aborted."
    nil
    nil
    (my/org-roam-filter-by-tag "Project")
+   nil
    :templates
    '(("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Project")
       :unnarrowed t))))
-
-(defun my/org-roam-capture-inbox ()
-  (interactive)
-  (org-roam-capture- :node (org-roam-node-create)
-                     :templates '(("i" "inbox" plain "* %?"
-                                  :if-new (file+head "Inbox.org" "#+title: Inbox\n")))))
 
 (defun my/org-roam-capture-task ()
   (interactive)
@@ -618,13 +625,14 @@ capture was not aborted."
                (when (equal org-state "DONE")
                  (my/org-roam-copy-todo-to-today))))
 
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(embark-consult embark consult which-key magit dirvish org-bullets org-roam rainbow-delimiters visual-fill-column prettier-js all-the-icons doom-modeline eglot marginalia corfu orderless vertico evil-collection evil use-package)))
+   '(emmet-mode embark-consult embark consult which-key magit dirvish org-bullets org-roam rainbow-delimiters visual-fill-column prettier-js all-the-icons doom-modeline eglot marginalia corfu orderless vertico evil-collection evil use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
