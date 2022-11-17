@@ -485,8 +485,11 @@
 (add-hook 'js-mode-hook (lambda () (setq tab-width 2)))
 
 ;; C setup
+(defun nao/c-mode-keybinds ()
+  (define-key c-mode-map (kbd "C-c m") 'compile))
 (add-hook 'c-mode 'eglot-ensure)
-(define-key c-mode-map (kbd "C-c m") 'compile)
+(add-hook 'c-mode-hook #'nao/c-mode-keybinds)
+
 
 
 (use-package emmet-mode
@@ -664,5 +667,3 @@ capture was not aborted."
              (lambda ()
                (when (equal org-state "DONE")
                  (my/org-roam-copy-todo-to-today))))
-
-
