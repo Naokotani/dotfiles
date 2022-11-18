@@ -2,8 +2,6 @@
 
 ;;;Basic defaults
 
-(setq inhibit-startup-message t)
-
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar
 (tooltip-mode -1)           ; Disable tooltips
@@ -667,3 +665,18 @@ capture was not aborted."
              (lambda ()
                (when (equal org-state "DONE")
                  (my/org-roam-copy-todo-to-today))))
+
+(use-package page-break-lines)
+
+(use-package dashboard
+  :straight t
+  :custom
+  (dashboard-set-heading-icons t)
+  (dashboard-set-file-icons t)
+  (dashboard-startup-banner 'logo)
+  (dashboard-set-footer nil)
+  (dashboard-banner-logo-title nil)
+  (dashboard-items '((recents  . 5)
+                     (agenda . 5)))
+  :config
+  (dashboard-setup-startup-hook))
