@@ -169,7 +169,6 @@
   (add-to-list 'ispell-skip-region-alist '(org-property-drawer-re)))
 (add-hook 'org-mode-hook #'nao/org-ispell-ignore)
 
-;; Enable vertico
 ;; Vertico offers mini buffer completion for M-x, open file, and other comamnds.
 (use-package vertico
   :straight (:files (:defaults "extensions/*")) ; Must explicity load extentions folder (directory etc.)
@@ -522,6 +521,10 @@
 ;;Basic defaults
 (setq org-hide-emphasis-markers t)     
 (setq org-startup-with-inline-images t)
+
+;; Setup template for org source blocks
+(setq org-structure-template-alist
+	'(("el" . "src emacs-lisp")))
 
 (defun nao/org-mode-setup ()
         (org-indent-mode)
