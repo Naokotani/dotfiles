@@ -7,18 +7,21 @@
 (tooltip-mode -1)           ; Disable tooltips
 (set-fringe-mode 10)        ; Give some breathing room
 
-(menu-bar-mode -1)            ; Disable the menu bar
+(menu-bar-mode -1)          ; Disable the menu bar
 
-(setq visible-bell t)
+(setq visible-bell t)       ; Disable error bell and replace with flash
 
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-(column-number-mode)
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit) ; Binds escape to mimic default C-g keyboard-quit
 
-(setq custom-file (locate-user-emacs-file "custom-vars.el"))
+(column-number-mode)        ; Gives cursor position in mode line
+
+;; Puts Emacs customize code in seperate file. 
+(setq custom-file (locate-user-emacs-file "custom-vars.el")) 
 (load custom-file 'noerro 'nomessage)
 
-(global-auto-revert-mode 1)
-(setq global-auto-revert-non-file-buffers t)
+
+(global-auto-revert-mode 1)  ; Revert buffers when the file changes on disc
+(setq global-auto-revert-non-file-buffers t) ; Reverts dired buffers when directories change on disc
 
 ;; Enable line numbers for some modes
 (dolist (mode '(text-mode-hook
@@ -30,7 +33,7 @@
 (dolist (mode '(org-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-;;Setup auto saves
+;;Setup auto saves to save to temporary file folder, defaults to /tmp/
 
 (setq backup-directory-alist
       `((".*" . ,temporary-file-directory)))
@@ -64,22 +67,20 @@
 (use-package evil
   :init
   (setq evil-want-integration t)
-  (setq evil-want-keybinding nil)
-  (setq evil-want-C-u-scroll t)
-  (setq evil-want-C-i-jump nil)
+  (setq evil-want-keybinding nil) ; Sets evil keybinds for other modes
+  (setq evil-want-C-u-scroll t) ; Allows for the standard vim C-u  motion
+  (setq evil-want-C-i-jump nil) ; Disable default evil jump forward in jump list
   :config
   (evil-mode 1)
   (define-key evil-insert-state-map (kbd "C-g") 'evil-normal-state)
+  ;; Enables default vim keybind to delete backward
   (define-key evil-insert-state-map (kbd "C-h") 'evil-delete-backward-char-and-join)
 
-  ;; Use visual line motions even outside of visual-line-mode buffers
-  ;;This causes j and k motions to not work correctly with d and y
-;  (evil-global-set-key 'motion "j" 'evil-next-visual-line)
-;  (evil-global-set-key 'motion "k" 'evil-previous-visual-line)
-
+  ;; Set up Evil for messages buffer and dashboard mode
   (evil-set-initial-state 'messages-buffer-mode 'normal)
   (evil-set-initial-state 'dashboard-mode 'normal))
 
+;; Evil mode for various other modes
 (use-package evil-collection
   :after evil
   :config
@@ -87,8 +88,9 @@
 
 ;;;Theming
 
-;;Faces
+;;Faces sets default faces for variable pitch and fixed pitch as well as default text size
 
+;; Default face
 (defvar nao/default-font-size 120)
 (set-face-attribute 'default nil :font "Fira Code retina" :height nao/default-font-size)
 
@@ -98,30 +100,37 @@
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "NotoSerif" :height 140)
 
-(setq modus-themes-italic-constructs t)
-(setq modus-themes-completions '(opinionated))
-(setq modus-themes-tabs-accented t)
-(setq modus-themes-mode-line '(accented borderless padded))
-(setq modus-themes-region '(bg-only))
-(setq modus-themes-paren-match '(bold intense))
-(setq modus-themes-org-blocks 'tinted-background)
+
+(setq modus-themes-italic-constructs t)                     ; Allows for the use of italic fonts
+(setq modus-themes-completions '(opinionated))              ; Completition theming mimics Ivy, Helm
+(setq modus-themes-tabs-accented t)                         ; Accent active tab
+(setq modus-themes-mode-line '(accented borderless padded)) ; Setup modeline theming
+(setq modus-themes-region '(bg-only))                       ; More Sublte selection background
+(setq modus-themes-paren-match '(bold intense))             ; Matching paren highlight stands out more
+(setq modus-themes-org-blocks 'tinted-background)           ; Allows for language specifc org source block coloring
+;; Org heading face size
 (setq modus-themes-headings
     '((1 . (rainbow bold 1.4))
         (2 . (rainbow bold 1.3))
         (3 . (rainbow bold 1.2))
         (t . (semilight 1.1))))
-(setq modus-themes-scale-headings t)
-(load-theme 'modus-vivendi t)
 
+
+(setq modus-themes-scale-headings t) ; Allow font scaling for headings
+(load-theme 'modus-vivendi t)        ; Load dark theme by default
+
+;; Load Doom modeline and display battery 
 (use-package doom-modeline
   :straight t
-  :init (doom-modeline-mode 1))
+  :init (doom-modeline-mode 1)
+  :config
+  (display-battery-mode 1))
 
-(display-battery-mode 1)
-
+;;Install all the icons for integration into doom modeline and dirvish
 (use-package all-the-icons
   :straight t)
 
+;; Install popper to create pop up windows for shells/terminals
 (use-package popper
   :straight t
   :bind (("C-`"   . popper-toggle-latest)
@@ -139,16 +148,19 @@
 
 ;;;Completion
 
+;; Which key package gives hints for key chords
 (use-package which-key)
 
 
-;; Spell Checking
+;;; Spell Checking
 
+;; Enables spell checking for text mode and disable for some other modes
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
 (dolist (hook '(change-log-mode-hook log-edit-mode-hook))
   (add-hook hook (lambda () (flyspell-mode -1))))
 
+;; Set spell checking to use the command line program hunspell
 (setq ispell-program-name "hunspell")
 
 (defun nao/org-ispell-ignore ()
@@ -158,8 +170,9 @@
 (add-hook 'org-mode-hook #'nao/org-ispell-ignore)
 
 ;; Enable vertico
+;; Vertico offers mini buffer completion for M-x, open file, and other comamnds.
 (use-package vertico
-  :straight (:files (:defaults "extensions/*"))
+  :straight (:files (:defaults "extensions/*")) ; Must explicity load extentions folder (directory etc.)
   :init
   (vertico-mode)
 
@@ -175,6 +188,7 @@
   ;;enable cycling for `vertico-next' and `vertico-previous'.
   (setq vertico-cycle t))
 
+; vim like keybinds in completion minibuffer
 (with-eval-after-load 'evil
   (define-key vertico-map (kbd "C-j") 'vertico-next)
   (define-key vertico-map (kbd "C-k") 'vertico-previous)
@@ -212,18 +226,19 @@
   ;; Enable recursive minibuffers
   (setq enable-recursive-minibuffers t))
 
-;; Optionally use the `orderless' completion style.
+;; Smarter fuzzy finding in completion buffers
 (use-package orderless
   :init
   (setq completion-styles '(orderless basic)
         completion-category-defaults nil
         completion-category-overrides '((file (styles partial-completion)))))
 
+;; Completion engine for code completion etc. 
 (use-package corfu
   ;; Optional customizations
   :custom
   ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
-  (corfu-auto t)                 ;; Enable auto completion
+  (corfu-auto t)                 ;; Enable auto completion without keybind
   ;; (corfu-separator ?\s)          ;; Orderless field separator
   ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
   ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
@@ -272,7 +287,9 @@
   ;; Must be in the :init section of use-package such that the mode gets
   ;; enabled right away. Note that this forces loading the package.
   (marginalia-mode))
+
 ;; Example configuration for Consult
+;; Adds practical commands to the completioni buffer
 (use-package consult
   ;; Replace bindings. Lazily loaded due by `use-package'.
   :bind (;; C-c bindings (mode-specific-map)
@@ -498,30 +515,34 @@
 
 ;;; Org Mode
 
+;; Ensure Org Mode is loaded
 (use-package org
   :straight t)
 
 ;;Basic defaults
-(setq org-hide-emphasis-markers t)
+(setq org-hide-emphasis-markers t)     
 (setq org-startup-with-inline-images t)
 
 (defun nao/org-mode-setup ()
         (org-indent-mode)
+		;; Allow variable pitch faces
         (variable-pitch-mode 1)
+		;; Enables line wrapping
         (visual-line-mode 1))
 
+;; Gives a list of keywords for org agenda. The bottom list is used for a custom org agenda workflow buffer
 (setq org-todo-keywords
 '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
 	(sequence "BACKLOG(b)" "PLAN(p)" "READY(r)" "ACTIVE(a)" "REVIEW(v)" "WAIT(w@/!)" "HOLD(h)" "|" "COMPLETED(c)" "CANC(k@)")))
 
+;; Tags for org agenda TODOs 
 (setq org-tag-alist
 '((:startgroup)
 	; Put mutually exclusive tags here
 	(:endgroup)
-	("@errand" . ?E)
+	("@board" . ?B)
 	("@home" . ?H)
 	("@work" . ?W)
-	("@web" . ?w)
 	("Agenda" . ?a)
 	("Python" . ?p)
 	("Emacs" . ?e)
@@ -537,21 +558,18 @@
 	(todo "NEXT"
 	((org-agenda-overriding-header "Next Tasks")))
 	(tags-todo "agenda/ACTIVE" ((org-agenda-overriding-header "Active Projects")))))
-
+;; View only taks marked NEXT
 ("n" "Next Tasks"
 	((todo "NEXT"
 	((org-agenda-overriding-header "Next Tasks")))))
 
-("W" "Work Tasks" tags-todo "+@work-@home-@Lock")
-("L" "Lockraid Tasks" tags-todo "+@Lock-@home-@work")
-("H" "Home Tasks" tags-todo "+@home-@Lock-@work")
+;;View tasks based on tags
+("W" "Work Tasks" tags-todo "+@work-@home-@Lock-@board")
+("L" "Lockraid Tasks" tags-todo "+@Lock-@home-@work-@board")
+("H" "Home Tasks" tags-todo "+@home-@Lock-@work-@board")
+("B" "Home Tasks" tags-todo "+@board-@home-@Lock-@work")
 
-;; Low-effort next actions
-("e" tags-todo "+TODO=\"NEXT\"+Effort<15&+Effort>0"
-	((org-agenda-overriding-header "Low Effort Tasks")
-	(org-agenda-max-todos 20)
-	(org-agenda-files org-agenda-files)))
-
+;; Setup buffer to display workflow
 ("w" "Workflow Status"
 	((todo "ACTIVE"
 		((org-agenda-overriding-header "Active Projects")
@@ -604,11 +622,13 @@
   (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
   (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
+;;Org Bullets provides nicer bullets for Org Mode headers and lists
 (use-package org-bullets
   :custom
   (setq org-bullets-bullet-list '("◉" "○" "●" "○" "●" "○" "●")))
 
 
+;; Visual Fill Column provides margins for buffers
 (use-package visual-fill-column)
 (defun nao/org-mode-visual-fill ()
         (setq visual-fill-column-width 120
@@ -619,27 +639,28 @@
 (add-hook 'org-mode-hook #'nao/org-mode-setup)
 (add-hook 'org-mode-hook #'nao/org-font-setup)
 (add-hook 'org-mode-hook #'org-bullets-mode)
-(add-hook 'org-mode-hook #'nao/org-mode-visual-fill)
+(add-hook 'org-mode-hook #'nao/org-mode-visual-fill) ; Display margins in Org buffers
 
 
-;; Org Roam
+;; Org Roam is a Zeitelkasten method note taking package
 (use-package org-roam
   :straight t
   :demand t
   :init
   (setq org-roam-v2-ack t)
   :custom
-  (org-roam-directory "~/org-roam")
-  (org-roam-completion-everywhere t)
-  :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n i" . org-roam-node-insert)
-         ("C-c n I" . org-roam-node-insert-immediate)
-         ("C-c n p" . my/org-roam-find-project)
-         ("C-c n t" . my/org-roam-capture-task)
+  (org-roam-directory "~/org-roam") ; Tell Roam where to store files 
+  (org-roam-completion-everywhere t); Enagle Roam caputre template in all buffers
+  :bind (("C-c n l" . org-roam-buffer-toggle) ; Not entirely sure what this does
+         ("C-c n f" . org-roam-node-find)     ; Find specific node, if it doesn't exist, create it
+         ("C-c n i" . org-roam-node-insert)   ; Insert link to a node
+         ("C-c n I" . org-roam-node-insert-immediate) ; Insert highlighted word as node
+         ("C-c n p" . my/org-roam-find-project) ; Find nodes with the project tag
+         ("C-c n t" . my/org-roam-capture-task) ; capture a todo and insert into node
          :map org-mode-map
          ("C-M-i" . completion-at-point)
          :map org-roam-dailies-map
+		 ;;Navigate org roam dailies
          ("Y" . org-roam-dailies-capture-yesterday)
          ("T" . org-roam-dailies-capture-tomorrow))
   :bind-keymap
@@ -713,6 +734,7 @@ capture was not aborted."
                                                           "#+title: ${title}\n#+category: ${title}\n#+filetags: Project"
                                                           ("Tasks"))))))
 
+;; When TODOs are changed to the complete state move the to the roam daily node for that day
 (defun my/org-roam-copy-todo-to-today ()
   (interactive)
   (let ((org-refile-keep t) ;; Set this to nil to delete the original!
@@ -739,6 +761,7 @@ capture was not aborted."
 
 (use-package page-break-lines)
 
+;; Simple dashboard that displays recent files and upcoming agenda items
 (use-package dashboard
   :straight t
   :custom
