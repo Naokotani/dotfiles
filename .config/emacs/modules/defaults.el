@@ -1,3 +1,4 @@
+;; [[file:../../../../org-roam/20221120034815-emacs.org::*Defaults][Defaults:1]]
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar
 (tooltip-mode -1)           ; Disable tooltips
@@ -16,13 +17,13 @@
 (load custom-file 'noerro 'nomessage)
 
 
-(global-auto-revert-mode 1)  ; Revert buffers when the file changes on disc
+(setq global-auto-revert-mode t)  ; Revert buffers when the file changes on disc
 (setq global-auto-revert-non-file-buffers t) ; Reverts dired buffers when directories change on disc
 
 ;; Enable line numbers for some modes
 (dolist (mode '(text-mode-hook
-                prog-mode-hook
-                conf-mode-hook))
+				prog-mode-hook
+				conf-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 1))))
 
 ;; Override some modes which derive from the above
@@ -32,6 +33,7 @@
 ;;Setup auto saves to save to temporary file folder, defaults to /tmp/
 
 (setq backup-directory-alist
-      `((".*" . ,temporary-file-directory)))
+	  `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
-      `((".*" ,temporary-file-directory t)))
+	  `((".*" ,temporary-file-directory t)))
+;; Defaults:1 ends here

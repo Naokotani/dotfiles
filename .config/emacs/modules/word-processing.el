@@ -1,3 +1,4 @@
+;; [[file:../../../../org-roam/20221120034815-emacs.org::*Spell Checking][Spell Checking:1]]
 ;; Enables spell checking for text mode and disable for some other modes
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
@@ -12,3 +13,4 @@
   (make-local-variable 'ispell-skip-region-alist)
   (add-to-list 'ispell-skip-region-alist '(org-property-drawer-re)))
 (add-hook 'org-mode-hook #'nao/org-ispell-ignore)
+;; Spell Checking:1 ends here

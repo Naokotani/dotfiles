@@ -1,3 +1,4 @@
+;; [[file:../../../../org-roam/20221120034815-emacs.org::*Completion][Completion:1]]
 ;; Which key package gives hints for key chords
 (use-package which-key)
 
@@ -267,3 +268,4 @@
   :straight t ; only need to install it, embark loads it after consult if found
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
+;; Completion:1 ends here

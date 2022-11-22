@@ -1,3 +1,4 @@
+;; [[file:../../../../org-roam/20221120034815-emacs.org::*Dired][Dired:1]]
 ;; Dirvish
 (use-package dirvish
   :custom
@@ -38,3 +39,4 @@
     "y" 'dirvish-yank-menu
     "b" 'dirvish-bookmark-jump
     "X" 'dired-ranger-move)
+;; Dired:1 ends here

@@ -1,3 +1,4 @@
+;; [[file:../../../../org-roam/20221120034815-emacs.org::*Org Mode][Org Mode:1]]
 ;; Ensure Org Mode is loaded
 (use-package org
   :straight t)
@@ -163,19 +164,19 @@
                                                   '(:immediate-finish t)))))
     (apply #'org-roam-node-insert args)))
 
-(defun my/org-roam-filter-by-tag ()
+(defun my/org-roam-filter-by-tag (tag-name)
   (lambda (node)
-    (member "Project" (org-roam-node-tags node))))
+    (member tag-name (org-roam-node-tags node))))
 
-(defun my/org-roam-list-notes-by-tag ()
+(defun my/org-roam-list-notes-by-tag (tag-name)
   (mapcar #'org-roam-node-file
           (seq-filter
-           (my/org-roam-filter-by-tag)
+           (my/org-roam-filter-by-tag tag-name)
            (org-roam-node-list))))
 
 (defun my/org-roam-refresh-agenda-list ()
   (interactive)
-  (setq org-agenda-files (my/org-roam-list-notes-by-tag)))
+  (setq org-agenda-files (my/org-roam-list-notes-by-tag "Project")))
 
 ;; Build the agenda list the first time for the session
 (my/org-roam-refresh-agenda-list)
@@ -200,7 +201,7 @@ capture was not aborted."
   (org-roam-node-find
    nil
    nil
-   (my/org-roam-filter-by-tag)
+   (my/org-roam-filter-by-tag "Project")
    nil
    :templates
    '(("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
@@ -215,7 +216,7 @@ capture was not aborted."
   ;; Capture the new task, creating the project file if necessary
   (org-roam-capture- :node (org-roam-node-read
                             nil
-                            (my/org-roam-filter-by-tag))
+                            (my/org-roam-filter-by-tag "Project"))
                      :templates '(("p" "project" plain "** TODO %?"
                                    :if-new (file+head+olp "%<%Y%m%d%H%M%S>-${slug}.org"
                                                           "#+title: ${title}\n#+category: ${title}\n#+filetags: Project"
@@ -245,3 +246,4 @@ capture was not aborted."
              (lambda ()
                (when (equal org-state "DONE")
                  (my/org-roam-copy-todo-to-today))))
+;; Org Mode:1 ends here
