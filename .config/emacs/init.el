@@ -24,6 +24,6 @@
 
 (require 'find-lisp)
 
-(mapcar (lambda (fn) (load (file-name-sans-extension fn))) (find-lisp-find-files "~/.dotfiles/.config/emacs/early-modules" "\\.el\\'"))
+(mapcar (lambda (fn) (load (file-name-sans-extension fn))) (find-lisp-find-files "~/.config/emacs/early-modules" "\\.el\\'"))
 
-(mapcar (lambda (fn) (load (file-name-sans-extension fn))) (find-lisp-find-files "~/.dotfiles/.config/emacs/modules" "\\.el\\'"))
+(mapcar (lambda (fn) (load (file-name-sans-extension fn))) (find-lisp-find-files "~/.config/emacs/modules" "\\.el\\'"))
