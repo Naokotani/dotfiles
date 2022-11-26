@@ -1,22 +1,34 @@
 ;; [[file:../../../../org-roam/20221120034815-emacs.org::*Org Mode][Org Mode:1]]
 ;; Ensure Org Mode is loaded
+
+;; Function to make Evil respect visual lines
+(defun nao/evil-visual-line ()
+  (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
+  (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line))
+
 (use-package org
-  :straight t)
+  :straight t
+  :hook
+  ;; Make evil respect visual lines in org mode
+  (org-mode . nao/evil-visual-line))
 
 ;;Basic defaults
 (setq org-hide-emphasis-markers t)     
 (setq org-startup-with-inline-images t)
+
+;; Setup evil for visual line mode
+(setq evil-respect-visual-line-mode t)
 
 ;; Setup template for org source blocks
 (setq org-structure-template-alist
 	'(("el" . "src emacs-lisp")))
 
 (defun nao/org-mode-setup ()
-        (org-indent-mode)
+		(org-indent-mode)
 		;; Allow variable pitch faces
-        (variable-pitch-mode 1)
+		(variable-pitch-mode 1)
 		;; Enables line wrapping
-        (visual-line-mode 1))
+		(visual-line-mode 1))
 
 ;; Gives a list of keywords for org agenda. The bottom list is used for a custom org agenda workflow buffer
 (setq org-todo-keywords
@@ -91,8 +103,8 @@
   (require 'org-faces)
   ;; Replace list hyphen with dot
   (font-lock-add-keywords 'org-mode
-                          '(("^ *\\([-]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+						  '(("^ *\\([-]\\) "
+							 (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
@@ -119,9 +131,9 @@
 ;; Visual Fill Column provides margins for buffers
 (use-package visual-fill-column)
 (defun nao/org-mode-visual-fill ()
-        (setq visual-fill-column-width 120
-                                visual-fill-column-center-text t)
-        (visual-fill-column-mode 1))
+		(setq visual-fill-column-width 120
+								visual-fill-column-center-text t)
+		(visual-fill-column-mode 1))
 
 ;; Org-mode hooks
 (add-hook 'org-mode-hook #'nao/org-mode-setup)
@@ -140,17 +152,17 @@
   (org-roam-directory "~/org-roam") ; Tell Roam where to store files 
   (org-roam-completion-everywhere t); Enagle Roam caputre template in all buffers
   :bind (("C-c n l" . org-roam-buffer-toggle) ; Not entirely sure what this does
-         ("C-c n f" . org-roam-node-find)     ; Find specific node, if it doesn't exist, create it
-         ("C-c n i" . org-roam-node-insert)   ; Insert link to a node
-         ("C-c n I" . org-roam-node-insert-immediate) ; Insert highlighted word as node
-         ("C-c n p" . my/org-roam-find-project) ; Find nodes with the project tag
-         ("C-c n t" . my/org-roam-capture-task) ; capture a todo and insert into node
-         :map org-mode-map
-         ("C-M-i" . completion-at-point)
-         :map org-roam-dailies-map
+		 ("C-c n f" . org-roam-node-find)     ; Find specific node, if it doesn't exist, create it
+		 ("C-c n i" . org-roam-node-insert)   ; Insert link to a node
+		 ("C-c n I" . org-roam-node-insert-immediate) ; Insert highlighted word as node
+		 ("C-c n p" . my/org-roam-find-project) ; Find nodes with the project tag
+		 ("C-c n t" . my/org-roam-capture-task) ; capture a todo and insert into node
+		 :map org-mode-map
+		 ("C-M-i" . completion-at-point)
+		 :map org-roam-dailies-map
 		 ;;Navigate org roam dailies
-         ("Y" . org-roam-dailies-capture-yesterday)
-         ("T" . org-roam-dailies-capture-tomorrow))
+		 ("Y" . org-roam-dailies-capture-yesterday)
+		 ("T" . org-roam-dailies-capture-tomorrow))
   :bind-keymap
   ("C-c n d" . org-roam-dailies-map)
   :config
@@ -160,19 +172,19 @@
 (defun org-roam-node-insert-immediate (arg &rest args)
   (interactive "P")
   (let ((args (push arg args))
-        (org-roam-capture-templates (list (append (car org-roam-capture-templates)
-                                                  '(:immediate-finish t)))))
-    (apply #'org-roam-node-insert args)))
+		(org-roam-capture-templates (list (append (car org-roam-capture-templates)
+												  '(:immediate-finish t)))))
+	(apply #'org-roam-node-insert args)))
 
 (defun my/org-roam-filter-by-tag (tag-name)
   (lambda (node)
-    (member tag-name (org-roam-node-tags node))))
+	(member tag-name (org-roam-node-tags node))))
 
 (defun my/org-roam-list-notes-by-tag (tag-name)
   (mapcar #'org-roam-node-file
-          (seq-filter
-           (my/org-roam-filter-by-tag tag-name)
-           (org-roam-node-list))))
+		  (seq-filter
+		   (my/org-roam-filter-by-tag tag-name)
+		   (org-roam-node-list))))
 
 (defun my/org-roam-refresh-agenda-list ()
   (interactive)
@@ -189,8 +201,8 @@ capture was not aborted."
 
   ;; Add project file to the agenda list if the capture was confirmed
   (unless org-note-abort
-    (with-current-buffer (org-capture-get :buffer)
-      (add-to-list 'org-agenda-files (buffer-file-name)))))
+	(with-current-buffer (org-capture-get :buffer)
+	  (add-to-list 'org-agenda-files (buffer-file-name)))))
 
 (defun my/org-roam-find-project ()
   (interactive)
@@ -205,8 +217,8 @@ capture was not aborted."
    nil
    :templates
    '(("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
-      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Project")
-      :unnarrowed t))))
+	  :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}\n#+filetags: Project")
+	  :unnarrowed t))))
 
 (defun my/org-roam-capture-task ()
   (interactive)
@@ -215,35 +227,35 @@ capture was not aborted."
 
   ;; Capture the new task, creating the project file if necessary
   (org-roam-capture- :node (org-roam-node-read
-                            nil
-                            (my/org-roam-filter-by-tag "Project"))
-                     :templates '(("p" "project" plain "** TODO %?"
-                                   :if-new (file+head+olp "%<%Y%m%d%H%M%S>-${slug}.org"
-                                                          "#+title: ${title}\n#+category: ${title}\n#+filetags: Project"
-                                                          ("Tasks"))))))
+							nil
+							(my/org-roam-filter-by-tag "Project"))
+					 :templates '(("p" "project" plain "** TODO %?"
+								   :if-new (file+head+olp "%<%Y%m%d%H%M%S>-${slug}.org"
+														  "#+title: ${title}\n#+category: ${title}\n#+filetags: Project"
+														  ("Tasks"))))))
 
 ;; When TODOs are changed to the complete state move the to the roam daily node for that day
 (defun my/org-roam-copy-todo-to-today ()
   (interactive)
   (let ((org-refile-keep t) ;; Set this to nil to delete the original!
-        (org-roam-dailies-capture-templates
-          '(("t" "tasks" entry "%?"
-             :if-new (file+head+olp "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n" ("Tasks")))))
-        (org-after-refile-insert-hook #'save-buffer)
-        today-file
-        pos)
-    (save-window-excursion
-      (org-roam-dailies--capture (current-time) t)
-      (setq today-file (buffer-file-name))
-      (setq pos (point)))
+		(org-roam-dailies-capture-templates
+		  '(("t" "tasks" entry "%?"
+			 :if-new (file+head+olp "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n" ("Tasks")))))
+		(org-after-refile-insert-hook #'save-buffer)
+		today-file
+		pos)
+	(save-window-excursion
+	  (org-roam-dailies--capture (current-time) t)
+	  (setq today-file (buffer-file-name))
+	  (setq pos (point)))
 
-    ;; Only refile if the target file is different than the current file
-    (unless (equal (file-truename today-file)
-                   (file-truename (buffer-file-name)))
-      (org-refile nil nil (list "Tasks" today-file nil pos)))))
+	;; Only refile if the target file is different than the current file
+	(unless (equal (file-truename today-file)
+				   (file-truename (buffer-file-name)))
+	  (org-refile nil nil (list "Tasks" today-file nil pos)))))
 
 (add-to-list 'org-after-todo-state-change-hook
-             (lambda ()
-               (when (equal org-state "DONE")
-                 (my/org-roam-copy-todo-to-today))))
+			 (lambda ()
+			   (when (equal org-state "DONE")
+				 (my/org-roam-copy-todo-to-today))))
 ;; Org Mode:1 ends here
