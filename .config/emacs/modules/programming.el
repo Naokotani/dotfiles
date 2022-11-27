@@ -22,6 +22,7 @@
 (use-package emmet-mode
   :hook ((sgml-mode . emmet-mode)
 		(css-mode . emmet-mode)
+		(web-mode . emmet-mode)
 		(js-mode . emmet-mode)))
 
 (use-package web-mode
