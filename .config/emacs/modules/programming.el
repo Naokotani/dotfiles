@@ -23,4 +23,8 @@
   :hook ((sgml-mode . emmet-mode)
 		(css-mode . emmet-mode)
 		(js-mode . emmet-mode)))
+
+(use-package web-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
 ;; Programming Languages Setup:1 ends here
