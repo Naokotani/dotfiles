@@ -22,7 +22,7 @@
 ;; Setup template for org source blocks
 (setq org-structure-template-alist
     '(("el" . "src emacs-lisp")
-      ("html" . "src html"))
+      ("html" . "src html")))
 
 (defun nao/org-mode-setup ()
         (org-indent-mode)
