@@ -5,6 +5,7 @@
   :custom
   (dirvish-quick-access-entries
 		'(("h" "~/" "Home")
+		  ("H" "/mnt/c/Users/mifka" "Windows Home")
 		  ("e" "~/.config/emacs/" "Emacs user directory")
 		  ("w" "~/WebDev/" "WebDev")
 		  ("c" "~/.config/" "config")
@@ -17,8 +18,8 @@
 		'(vc-state subtree-state all-the-icons collapse git-msg file-size))
   (dirvish-peek-mode)
   (setq dirvish-default-layout '(0 0.4 0.6))
-  (setq dirvish-header-line-height '(25 . 35))
-  (setq dirvish-mode-line-height '(25 . 35))
+  (setq dirvish-header-line-height '(25 . 25))
+  (setq dirvish-mode-line-height '(25 . 25))
   (setq dirvish-reuse-session 'resume)
   (setq dired-hide-details-mode t)
   (setq dired-listing-switches

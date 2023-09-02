@@ -8,4 +8,5 @@
                ("integration" "integration/*")
                (:exclude ".dir-locals.el" "*-tests.el"))))
 
+;; Emacs follows the working directory in Eat
 (setq eat-enable-directory-tracking t)
