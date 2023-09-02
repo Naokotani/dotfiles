@@ -1,4 +1,3 @@
-;; [[file:../../../../org-roam/20221120034815-emacs.org::*Themes][Themes:1]]
 ;;Faces sets default faces for variable pitch and fixed pitch as well as default text size
 
 ;; Default face
@@ -55,4 +54,3 @@
 		  ))
   (popper-mode +1)
   (popper-echo-mode +1))
-;; Themes:1 ends here

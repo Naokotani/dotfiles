@@ -1,11 +1,9 @@
-;; [[file:../../../../org-roam/20221120034815-emacs.org::*Org Mode][Org Mode:1]]
-;; Ensure Org Mode is loaded
-
 ;; Function to make Evil respect visual lines
 (defun nao/evil-visual-line ()
   (define-key evil-normal-state-map (kbd "j") 'evil-next-visual-line)
   (define-key evil-normal-state-map (kbd "k") 'evil-previous-visual-line))
 
+;; Ensure Org Mode is loaded
 (use-package org
   :straight t
   :hook
@@ -259,4 +257,3 @@ capture was not aborted."
              (lambda ()
                (when (equal org-state "DONE")
                  (my/org-roam-copy-todo-to-today))))
-;; Org Mode:1 ends here

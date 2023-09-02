@@ -1,28 +1,25 @@
-;; [[file:../../../../org-roam/20221120034815-emacs.org::*Dired][Dired:1]]
 ;; Dirvish
 (setq dired-dwim-target t)
 
 (use-package dirvish
   :custom
+  (dirvish-quick-access-entries
+		'(("h" "~/" "Home")
+		  ("e" "~/.config/emacs/" "Emacs user directory")
+		  ("w" "~/WebDev/" "WebDev")
+		  ("c" "~/.config/" "config")
+		  ("d" "~/Downloads/" "Downloads")))
+  :config
   (setq dirvish-mode-line-format ; it's ok to place string inside
 		'(:left (file-time " " file-size " " file-modes) :right (omit yank index)))
-
   (setq dirvish-header-line-format '(:left (path) :right (free-space)))
-  (setq dirvish-quick-access-entries
-		'(("h" "~/"                                  "Home")
-		  ("p" "~/pictures/"                         "Pictures")
-		  ("w" "~/webDev/"                           "WebDev")
-		  ("c" "~/.config/"                          "config")
-		  ("s" "~/webDev/sites/"                     "sites")
-		  ("P" "~/python/"                           "Python")
-		  ("f" "~/documents/"                        "Documents")
-		  ("d" "~/downloads/"                        "Downloads")))
   (setq dirvish-attributes
 		'(vc-state subtree-state all-the-icons collapse git-msg file-size))
   (dirvish-peek-mode)
-  (setq dirvish-default-layout '((0 0 0.4)))
-  (setq dirvish-emerge-mo 1)
-  (setq dirvish-reuse-session nil)
+  (setq dirvish-default-layout '(0 0.4 0.6))
+  (setq dirvish-header-line-height '(25 . 35))
+  (setq dirvish-mode-line-height '(25 . 35))
+  (setq dirvish-reuse-session 'resume)
   (setq dired-hide-details-mode t)
   (setq dired-listing-switches
 		"-l --almost-all --human-readable --time-style=long-iso --group-directories-first --no-group")
@@ -42,4 +39,3 @@
 	"y" 'dirvish-yank-menu
 	"b" 'dirvish-bookmark-jump
 	"X" 'dired-ranger-move)
-;; Dired:1 ends here

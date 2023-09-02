@@ -1,4 +1,3 @@
-;; [[file:../../../../org-roam/20221120034815-emacs.org::*Defaults][Defaults:1]]
 (scroll-bar-mode -1)        ; Disable visible scrollbar
 (tool-bar-mode -1)          ; Disable the toolbar
 (tooltip-mode -1)           ; Disable tooltips
@@ -36,4 +35,3 @@
 	  `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
 	  `((".*" ,temporary-file-directory t)))
-;; Defaults:1 ends here

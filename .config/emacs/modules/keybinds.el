@@ -1,4 +1,9 @@
-;; [[file:../../../../org-roam/20221120034815-emacs.org::*Keybinds][Keybinds:1]]
 (global-set-key (kbd "<f5>") 'async-shell-command)
 (global-set-key (kbd "<f6>") 'eshell)
-;; Keybinds:1 ends here
+(global-set-key (kbd "C-c D") 'dirvish-dispatch)
+(global-set-key (kbd "C-c d") 'dirvish)
+
+(add-hook 'eat-mode-hook
+          (lambda ()
+            (define-key evil-normal-state-local-map
+                        (kbd "p") 'eat-yank)))

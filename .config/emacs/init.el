@@ -1,5 +1,5 @@
-;; [[file:../../../org-roam/20221120034815-emacs.org::*Package management and load modules][Package management and load modules:1]]
-;; -*- lexical-binding: t; -*-
+;; Set warning level
+(setq warning-minimum-level :emergency)
 
 ;; Straight.el bootstrap
 (defvar bootstrap-version)
@@ -33,4 +33,3 @@
 (mapcar (lambda (fn)
 		  (load (file-name-sans-extension fn)))
 		(find-lisp-find-files "~/.config/emacs/modules" "\\.el\\'"))
-;; Package management and load modules:1 ends here

@@ -1,4 +1,3 @@
-;; [[file:../../../../org-roam/20221120034815-emacs.org::*Evil Mode][Evil Mode:1]]
 (use-package evil
   :init
   (setq evil-want-integration t)
@@ -20,4 +19,3 @@
   :after evil
   :config
   (evil-collection-init))
-;; Evil Mode:1 ends here

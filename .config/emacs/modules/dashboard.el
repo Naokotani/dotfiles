@@ -1,4 +1,3 @@
-;; [[file:../../../../org-roam/20221120034815-emacs.org::*Dashboard][Dashboard:1]]
 (use-package page-break-lines)
 
   ;; Simple dashboard that displays recent files and upcoming agenda items
@@ -14,4 +13,3 @@
                        (agenda . 5)))
   :config
   (dashboard-setup-startup-hook))
-;; Dashboard:1 ends here

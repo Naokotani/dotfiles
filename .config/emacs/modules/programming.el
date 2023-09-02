@@ -1,4 +1,3 @@
-;; [[file:../../../../org-roam/20221120034815-emacs.org::*Programming Languages Setup][Programming Languages Setup:1]]
 ;; Rainbow brackets
 (use-package rainbow-delimiters
   :hook ((prog-mode . rainbow-delimiters-mode)))
@@ -27,4 +26,3 @@
   :config
   (setq web-mode-code-indent-offset 2)
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
-;; Programming Languages Setup:1 ends here
