@@ -17,8 +17,8 @@
 (load custom-file 'noerro 'nomessage)
 
 
-(setq global-auto-revert-mode t)  ; Revert buffers when the file changes on disc
-(setq global-auto-revert-non-file-buffers t) ; Reverts dired buffers when directories change on disc
+(setq global-auto-revert-mode 1)  ; Revert buffers when the file changes on disc
+(setq global-auto-revert-non-file-buffers 1) ; Reverts dired buffers when directories change on disc
 
 ;; Enable line numbers for some modes
 (dolist (mode '(text-mode-hook

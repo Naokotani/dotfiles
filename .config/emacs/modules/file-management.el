@@ -1,5 +1,7 @@
 ;; [[file:../../../../org-roam/20221120034815-emacs.org::*Dired][Dired:1]]
 ;; Dirvish
+(setq dired-dwim-target t)
+
 (use-package dirvish
   :custom
   (setq dirvish-mode-line-format ; it's ok to place string inside
@@ -34,7 +36,7 @@
 	"l" 'dired-find-file
 	"J" 'dirvish-history-jump
 	"M" 'dirvish-media-properties
-	"F" 'dirvish-toggle-fullscreen
+	"F" 'dirvish-layout-toggle
 	"f" 'dirvish-file-info-menu
 	"N" 'dirvish-narrow
 	"y" 'dirvish-yank-menu

@@ -3,8 +3,6 @@
 (use-package rainbow-delimiters
   :hook ((prog-mode . rainbow-delimiters-mode)))
 
-(use-package eglot)
-
 ;; Javascript setup
 (use-package prettier-js)
 (add-hook 'js-mode-hook 'eglot-ensure)
@@ -21,11 +19,12 @@
 
 (use-package emmet-mode
   :hook ((sgml-mode . emmet-mode)
-		(css-mode . emmet-mode)
-		(web-mode . emmet-mode)
-		(js-mode . emmet-mode)))
+        (css-mode . emmet-mode)
+        (web-mode . emmet-mode)
+        (js-mode . emmet-mode)))
 
 (use-package web-mode
   :config
+  (setq web-mode-code-indent-offset 2)
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
 ;; Programming Languages Setup:1 ends here

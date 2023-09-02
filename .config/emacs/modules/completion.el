@@ -4,7 +4,6 @@
   :init
   (which-key-mode))
 
-
 ;; Vertico offers mini buffer completion for M-x, open file, and other comamnds.
 (use-package vertico
   :straight (:files (:defaults "extensions/*")) ; Must explicity load extentions folder (directory etc.)
