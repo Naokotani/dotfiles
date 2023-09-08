@@ -8,7 +8,9 @@
   :straight t
   :hook
   ;; Make evil respect visual lines in org mode
-  (org-mode . nao/evil-visual-line))
+  (org-mode . nao/evil-visual-line)
+  :bind
+  (("C-c a" . org-agenda)))
 
 ;;basic defaults
 (setq org-hide-emphasis-markers t)     
@@ -65,10 +67,10 @@
     ((org-agenda-overriding-header "Next Tasks")))))
 
 ;;View tasks based on tags
-("W" "Work Tasks" tags-todo "+@work-@home-@Lock-@board")
-("L" "Lockraid Tasks" tags-todo "+@Lock-@home-@work-@board")
-("H" "Home Tasks" tags-todo "+@home-@Lock-@work-@board")
-("B" "Home Tasks" tags-todo "+@board-@home-@Lock-@work")
+;; ("W" "Work Tasks" tags-todo "+@work-@home-@Lock-@board")
+;; ("L" "Lockraid Tasks" tags-todo "+@Lock-@home-@work-@board")
+;; ("H" "Home Tasks" tags-todo "+@home-@Lock-@work-@board")
+;; ("B" "Home Tasks" tags-todo "+@board-@home-@Lock-@work")
 
 ;; Setup buffer to display workflow
 ("w" "Workflow Status"
@@ -152,8 +154,7 @@
   :custom
   (org-roam-directory "~/org-roam") ; Tell Roam where to store files 
   (org-roam-completion-everywhere t); Enagle Roam caputre template in all buffers
-  :bind (("C-c n l" . org-roam-buffer-toggle) ; Not entirely sure what this does
-         ("C-c n f" . org-roam-node-find)     ; Find specific node, if it doesn't exist, create it
+  :bind (("C-c n f" . org-roam-node-find)     ; Find specific node, if it doesn't exist, create it
          ("C-c n i" . org-roam-node-insert)   ; Insert link to a node
          ("C-c n I" . org-roam-node-insert-immediate) ; Insert highlighted word as node
          ("C-c n d" . org-roam-dailies-goto-today) ; open today's daily note
@@ -180,4 +181,8 @@
   (setq denote-excluded-directories-regexp nil)
   (setq denote-excluded-keywords-regexp nil)
   ;; Pick dates, where relevant, with Org's advanced interface:
-  (setq denote-date-prompt-use-org-read-date t))
+  (setq denote-date-prompt-use-org-read-date t)
+  :bind
+  (("C-c n c" . denote)
+   ("C-c n o" . denote-open-or-create)
+   ("C-c n l" . denote-link)))
