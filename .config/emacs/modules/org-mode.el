@@ -33,6 +33,8 @@
 
 (setq org-agenda-files '("~/Documents/denote"))
 
+(setq org-agenda-prefix-format "%t %s")
+
 ;; Gives a list of keywords for org agenda. The bottom list is used for a custom org agenda workflow buffer
 (setq org-todo-keywords
 '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d!)")
