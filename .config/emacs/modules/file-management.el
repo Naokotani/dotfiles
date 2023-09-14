@@ -8,6 +8,7 @@
 		  ("H" "/mnt/c/Users/mifka" "Windows Home")
 		  ("e" "~/.config/emacs/" "Emacs user directory")
 		  ("w" "~/WebDev/" "WebDev")
+		  ("m" "~/.dotfiles/.config/emacs/modules/" "modules")
 		  ("c" "~/.config/" "config")
 		  ("d" "~/Downloads/" "Downloads")))
   :config
