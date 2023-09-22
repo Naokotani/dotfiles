@@ -16,6 +16,14 @@
 (add-hook 'c-mode 'eglot-ensure)
 (add-hook 'c-mode-hook #'nao/c-mode-keybinds)
 
+;; Java Setup
+(use-package eglot-java)
+(defun nao/java-mode-keybinds ()
+  (define-key java-mode-map (kbd "C-c m c") 'compile)
+  (define-key java-mode-map (kbd "C-c m m") 'recompile))
+(add-hook 'java-mode-hook 'eglot-java-mode)
+(add-hook 'java-mode-hook #'nao/java-mode-keybinds)
+
 (use-package emmet-mode
   :config
   (setq emmet-move-cursor-between-quotes t)
