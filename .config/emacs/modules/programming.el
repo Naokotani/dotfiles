@@ -17,6 +17,8 @@
 (add-hook 'c-mode-hook #'nao/c-mode-keybinds)
 
 (use-package emmet-mode
+  :config
+  (setq emmet-move-cursor-between-quotes t)
   :hook ((sgml-mode . emmet-mode)
         (css-mode . emmet-mode)
         (web-mode . emmet-mode)

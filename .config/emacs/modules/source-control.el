@@ -7,4 +7,4 @@
   :straight t
   :bind (("C-`"   . popper-toggle-latest)
 		 ("M-`"   . popper-cycle)
-		 ("C-M-`" . popper-toggle-type))
+		 ("C-M-`" . popper-toggle-type)))
