@@ -1,5 +1,5 @@
 ;; Set warning level
-(setq warning-minimum-level :emergency)
+;;(setq warning-minimum-level :emergency)
 
 ;; Straight.el bootstrap
 (defvar bootstrap-version)

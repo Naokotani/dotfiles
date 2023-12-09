@@ -3,10 +3,16 @@
   :hook ((prog-mode . rainbow-delimiters-mode)))
 
 ;; Javascript setup
+;Get Exec Path from bash shell
+(use-package exec-path-from-shell)
+((when (memq window-system '(mac ns x))
+  (exec-path-from-shell-initialize))
+
 (use-package prettier-js)
 (add-hook 'js-mode-hook 'eglot-ensure)
 (setq js-jsx-indent-level 2)
 (setq js-indent-level 2)
+(setq js-switch-indent-offset js-indent-level)
 (setq-default tab-width 4)
 (add-hook 'js-mode-hook (lambda () (setq tab-width 2)))
 

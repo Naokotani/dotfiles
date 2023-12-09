@@ -1,6 +1,4 @@
 ;; Dirvish
-(setq dired-dwim-target t)
-
 (use-package dirvish
   :custom
   (dirvish-quick-access-entries
@@ -41,3 +39,17 @@
 	"y" 'dirvish-yank-menu
 	"b" 'dirvish-bookmark-jump
 	"X" 'dired-ranger-move)
+
+;; dired options
+(add-hook 'rfn-eshadow-update-overlay-hook #'vertico-directory-tidy)
+(setq delete-by-moving-to-trash t)
+(setq dired-dwim-target t)
+
+;;Setup auto saves to save to temporary file folder, defaults to /tmp/
+(setq backup-directory-alist
+	  `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+	  `((".*" ,temporary-file-directory t)))
+
+;; Disable file locks since it's single user system this is not useful
+(setq create-lockfiles nil)

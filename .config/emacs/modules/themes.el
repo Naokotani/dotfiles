@@ -31,9 +31,10 @@
 ;; Load Doom mode line and display battery 
 (use-package doom-modeline
   :straight t
-  :init (doom-modeline-mode 1)
-  :config
-  (display-battery-mode 1))
+  :init (doom-modeline-mode 1))
+  ;;Add below if you want battery on laptop
+  ;; :config
+  ;; (display-battery-mode 1))
 
 ;;Install all the icons for integration into doom modeline and Dirvish
 (use-package all-the-icons
@@ -54,3 +55,6 @@
 		  ))
   (popper-mode +1)
   (popper-echo-mode +1))
+
+;; Transparency
+(set-frame-parameter nil 'alpha-background 90)

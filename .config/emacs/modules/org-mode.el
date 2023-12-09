@@ -21,8 +21,31 @@
 
 ;; Setup template for org source blocks
 (setq org-structure-template-alist
-    '(("el" . "src emacs-lisp")
-      ("html" . "src html")))
+      '(("el" . "src emacs-lisp")
+		("js" . "src javascript")
+		("css" . "src css")
+		("sql" . "src sql")
+		("html" . "src html")))
+
+(setq org-src-block-faces 
+	  '(("emacs-lisp" modus-themes-nuanced-magenta)
+		("elisp" modus-themes-nuanced-magenta)
+		("clojure" modus-themes-nuanced-magenta)
+		("clojurescript" modus-themes-nuanced-magenta)
+		("c" modus-themes-nuanced-blue)
+		("c++" modus-themes-nuanced-blue)
+		("sh" modus-themes-nuanced-green)
+		("sql" modus-themes-nuanced-green)
+		("html" modus-themes-nuanced-yellow)
+		("xml" modus-themes-nuanced-yellow)
+		("css" modus-themes-nuanced-red)
+		("scss" modus-themes-nuanced-red)
+		("python" modus-themes-nuanced-green)
+		("ipython" modus-themes-nuanced-magenta)
+		("javascript" modus-themes-nuanced-cyan)
+		("yaml" modus-themes-nuanced-cyan)
+		("conf" modus-themes-nuanced-cyan)
+		("docker" modus-themes-nuanced-cyan)))
 
 (defun nao/org-mode-setup ()
         (org-indent-mode)
@@ -33,7 +56,11 @@
 
 (setq org-agenda-files '("~/Documents/denote"))
 
-(setq org-agenda-prefix-format "%t %s")
+
+(setq org-agenda-prefix-format '((agenda . " %i %?-12t% s")
+							   (todo . " %i")
+							   (tags . " %i")
+							   (search . " %i")))
 
 ;; Gives a list of keywords for org agenda. The bottom list is used for a custom org agenda workflow buffer
 (setq org-todo-keywords
@@ -146,6 +173,7 @@
 (add-hook 'org-mode-hook #'org-bullets-mode)
 (add-hook 'org-mode-hook #'nao/org-mode-visual-fill) ; Display margins in Org buffers
 
+(use-package org-present)
 
 ;; Org Roam is a Zeitelkasten method note taking package
 (use-package org-roam

@@ -29,11 +29,5 @@
 (dolist (mode '(org-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
-;;Setup auto saves to save to temporary file folder, defaults to /tmp/
 
-(setq backup-directory-alist
-	  `((".*" . ,temporary-file-directory)))
-(setq auto-save-file-name-transforms
-	  `((".*" ,temporary-file-directory t)))
-
-(set-frame-parameter nil 'alpha-background 85)
+(set-frame-parameter nil 'alpha-background 90)
