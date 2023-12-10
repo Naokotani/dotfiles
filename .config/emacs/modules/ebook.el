@@ -11,3 +11,13 @@
 (add-hook 'nov-mode-hook 'my-nov-font-setup)
 (add-hook 'nov-mode-hook 'visual-line-mode)
 (add-hook 'nov-mode-hook 'visual-fill-column-mode)
+
+(use-package elfeed)
+(global-set-key (kbd "C-c w") 'elfeed)
+;; (setq elfeed-feeds
+;;       '(("https://planet.emacslife.com/atom.xml" emacs)
+;;         ("https://protesilaos.com/codelog.xml"  coding)
+;;         ("https://protesilaos.com/politics.xml" politics)))
+
+(setq elfeed-feeds
+        '(("https://protesilaos.com/politics.xml" politics)))
