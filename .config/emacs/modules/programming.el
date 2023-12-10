@@ -5,7 +5,7 @@
 ;; Javascript setup
 ;Get Exec Path from bash shell
 (use-package exec-path-from-shell)
-((when (memq window-system '(mac ns x))
+(when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 
 (use-package prettier-js)
@@ -15,6 +15,9 @@
 (setq js-switch-indent-offset js-indent-level)
 (setq-default tab-width 2)
 (add-hook 'js-mode-hook (lambda () (setq tab-width 2)))
+
+;; Typescript
+(add-to-list 'auto-mode-alist '("\\.ts[x]?\\'" . tsx-ts-mode))
 
 (use-package flycheck 
 :ensure t 
