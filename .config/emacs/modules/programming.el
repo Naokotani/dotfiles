@@ -19,12 +19,6 @@
 ;; Typescript
 (add-to-list 'auto-mode-alist '("\\.ts[x]?\\'" . tsx-ts-mode))
 
-(use-package flycheck 
-:ensure t 
-:init (global-flycheck-mode))
-
-(flycheck-add-mode 'javascript-eslint 'web-mode)
-
 ;; C setup
 (defun nao/c-mode-keybinds ()
   (define-key c-mode-map (kbd "C-c m") 'compile))
