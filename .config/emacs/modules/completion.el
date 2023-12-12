@@ -9,15 +9,6 @@
   :init
   (vertico-mode)
 
-  ;; Different scroll margin
-  ;; (setq vertico-scroll-margin 0)
-
-  ;; Show more candidates
-  ;; (setq vertico-count 20)
-
-  ;; Grow and shrink the Vertico minibuffer
-  ;; (setq vertico-resize t)
-
   ;;enable cycling for `vertico-next' and `vertico-previous'.
   (setq vertico-cycle t))
 
@@ -70,7 +61,6 @@
 (use-package corfu
   ;; Optional customizations
   :custom
-  ;; (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
   (corfu-auto t)                 ;; Enable auto completion without keybind
   ;; (corfu-separator ?\s)          ;; Orderless field separator
   ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
@@ -96,12 +86,7 @@
 (use-package emacs
   :init
   ;; TAB cycle if there are only few candidates
-  (setq completion-cycle-threshold 3)
-
-  ;; Emacs 28: Hide commands in M-x which do not apply to the current mode.
-  ;; Corfu commands are hidden, since they are not supposed to be used via M-x.
-  ;; (setq read-extended-command-predicate
-  ;;       #'command-completion-default-include-p)
+  (setq completion-cycle-threshold 2)
 
   ;; Enable indentation+completion using the TAB key.
   ;; `completion-at-point' is often bound to M-TAB.
@@ -243,25 +228,19 @@
 
 (use-package embark
   :straight t
-
   :bind
   (("C-." . embark-act)         ;; pick some comfortable binding
    ("C-;" . embark-dwim)        ;; good alternative: M-.
    ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
-
   :init
-
   ;; Optionally replace the key help with a completing-read interface
   (setq prefix-help-command #'embark-prefix-help-command)
-
   :config
-
   ;; Hide the mode line of the Embark live/completions buffers
   (add-to-list 'display-buffer-alist
 			   '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
 				 nil
 				 (window-parameters (mode-line-format . none)))))
-
 ;; Consult users will also want the embark-consult package.
 
 (use-package embark-consult

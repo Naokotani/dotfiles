@@ -28,6 +28,3 @@
 ;; Override some modes which derive from the above
 (dolist (mode '(org-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
-
-
-(set-frame-parameter nil 'alpha-background 90)

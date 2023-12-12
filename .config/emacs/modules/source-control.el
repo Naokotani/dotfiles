@@ -3,17 +3,16 @@
   :bind
   (("C-x g" . magit)))
 
-(use-package popper
-  :straight t
-  :init
-  (setq popper-reference-buffers
-        '("\\*Messages\\*"
-          "Output\\*$"
-          "\\*Async Shell Command\\*"
-          help-mode
-          compilation-mode))
-  :bind (("C-`"   . popper-toggle-latest)
-		 ("M-`"   . popper-cycle)
-		 ("C-M-`" . popper-toggle-type)))
+;;define list of git projects
+(defvar nao/git-projects '("~/Documents/denote" "~/.dotfiles"))
 
-(popper-mode)
+(defun nao/magit-status-select-project ()
+  "Prompt the user to select a project from the list and call nao/magit-status-for-project."
+  (interactive)
+  (let ((project (completing-read "Select a project: " nao/git-projects)))
+    (nao/magit-status-for-project project)))
+
+(defun nao/magit-status-for-project (project)
+  "Switch to PROJECT directory and display its Git status."
+  (cd project)
+  (magit-status))

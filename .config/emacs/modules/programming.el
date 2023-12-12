@@ -22,6 +22,7 @@
 ;; C setup
 (defun nao/c-mode-keybinds ()
   (define-key c-mode-map (kbd "C-c m") 'compile))
+
 (add-hook 'c-mode 'eglot-ensure)
 (add-hook 'c-mode-hook #'nao/c-mode-keybinds)
 

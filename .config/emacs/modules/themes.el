@@ -1,5 +1,3 @@
-;;Faces sets default faces for variable pitch and fixed pitch as well as default text size
-
 ;; Default face
 (defvar nao/default-font-size 120)
 (set-face-attribute 'default nil :font "Fira Code retina" :height nao/default-font-size)
@@ -10,7 +8,6 @@
 ;; Set the variable pitch face
 (set-face-attribute 'variable-pitch nil :font "NotoSerif" :height 140)
 
-
 (setq modus-themes-italic-constructs t)                     ; Allows for the use of italic fonts
 (setq modus-themes-completions '(opinionated))              ; Completion theming mimics Ivy, Helm
 (setq modus-themes-tabs-accented t)                         ; Accent active tab
@@ -18,6 +15,7 @@
 (setq modus-themes-region '(bg-only))                       ; More Subtle selection background
 (setq modus-themes-paren-match '(bold intense))             ; Matching paren highlight stands out more
 (setq modus-themes-org-blocks 'tinted-background)           ; Allows for language specific org source block coloring
+
 ;; Org heading face size
 (setq modus-themes-headings
 	'((1 . (rainbow bold 1.4))
@@ -50,11 +48,19 @@
   (setq popper-reference-buffers
 		'("^\\*eshell.*\\*$" eshell-mode ;eshell as a popup
 		  "^\\*shell.*\\*$"  shell-mode  ;shell as a popup
+      "\\*Async Shell Command\\*"
+			compilation-mode
 		  "^\\*term.*\\*$"   term-mode   ;term as a popup
-		  "^\\*vterm.*\\*$"  vterm-mode  ;vterm as a popup
 		  ))
   (popper-mode +1)
   (popper-echo-mode +1))
 
-;; Transparency
 (set-frame-parameter nil 'alpha-background 90)
+
+(defvar nao/alpha-background 90)
+
+(defun nao/toggle-alpha-background ()
+  "Toggle alpha-background between 90 and 100."
+  (interactive)
+  (setq nao/alpha-background (if (= nao/alpha-background 90) 100 90))
+  (set-frame-parameter nil 'alpha-background nao/alpha-background))
