@@ -1,3 +1,4 @@
+;; Global keymaps
 (global-set-key (kbd "<f5>") 'async-shell-command)
 (global-set-key (kbd "<f6>") 'eshell)
 (global-set-key (kbd "C-c D") 'dirvish-dispatch)
@@ -6,6 +7,9 @@
 (global-set-key (kbd "C-x b") 'consult-buffer)
 (global-set-key (kbd "M-w") 'hydra-window/body)
 (global-set-key (kbd "<f12>") 'nao/toggle-alpha-background)
+
+;; Org mode keymaps
+(define-key org-mode-map (kbd "<mouse-3>") 'ispell-word)
 
 ;; Allow Eat to handle pasting text
 (add-hook 'eat-mode-hook
