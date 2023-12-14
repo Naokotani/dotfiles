@@ -1,3 +1,4 @@
+;; Global keymaps
 (global-set-key (kbd "<f5>") 'async-shell-command)
 (global-set-key (kbd "<f6>") 'eshell)
 (global-set-key (kbd "C-c D") 'dirvish-dispatch)
@@ -7,11 +8,35 @@
 (global-set-key (kbd "M-w") 'hydra-window/body)
 (global-set-key (kbd "<f12>") 'nao/toggle-alpha-background)
 
+;; Org mode keymaps
+(define-key org-mode-map (kbd "<mouse-3>") 'ispell-word)
+
 ;; Allow Eat to handle pasting text
 (add-hook 'eat-mode-hook
           (lambda ()
             (define-key evil-normal-state-local-map
                         (kbd "p") 'eat-yank)))
+
+
+(defun nao/move-divider-right ()
+		(if (windows-sharing-edge (selected-window) 'right)
+				(enlarge-window-horizontally 1)
+			(shrink-window-horizontally 1)))
+
+(defun nao/move-divider-left ()
+		(if (windows-sharing-edge (selected-window) 'right)
+				(shrink-window-horizontally 1)
+			(enlarge-window-horizontally 1)))
+
+(defun nao/move-divider-down ()
+		(if (windows-sharing-edge (selected-window) 'below)
+				(enlarge-window 1)
+			(shrink-window 1)))
+
+(defun nao/move-divider-up ()
+		(if (windows-sharing-edge (selected-window) 'below)
+				(shrink-window 1)
+			(enlarge-window 1)))
 
 (use-package hydra)
 
@@ -27,10 +52,10 @@ Leaders: 'f' file 'b' buffer 'd' delete 't' Eat"
   ("j" windmove-down)
   ("k" windmove-up)
   ("l" windmove-right)
-  ("H" shrink-window-horizontally)
-  ("J" shrink-window)
-  ("K" enlarge-window)
-  ("L" enlarge-window-horizontally)
+  ("H" (nao/move-divider-left))
+  ("J" (nao/move-divider-down))
+  ("K" (nao/move-divider-up))
+  ("L" (nao/move-divider-right))
   ("|" (lambda ()
          (interactive)
          (split-window-right)
