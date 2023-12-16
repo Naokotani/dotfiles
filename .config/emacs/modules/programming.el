@@ -40,7 +40,8 @@
   :hook ((sgml-mode . emmet-mode)
         (css-mode . emmet-mode)
         (web-mode . emmet-mode)
-        (js-mode . emmet-mode)))
+        (js-mode . emmet-mode)
+				(emmet-mode . emmet-react-mode)))
 
 (use-package web-mode
   :config
