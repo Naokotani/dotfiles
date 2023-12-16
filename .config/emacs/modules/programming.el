@@ -48,8 +48,4 @@
   (setq web-mode-code-indent-offset 2)
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
 
-(use-package smartparens
-  :ensure smartparens
-  :hook (prog-mode)
-  :config
-  (require 'smartparens-config))
+(electric-pair-mode

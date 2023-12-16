@@ -13,3 +13,8 @@
                        (agenda . 5)))
   :config
   (dashboard-setup-startup-hook))
+
+(erc-tls :server "irc.libera.chat"
+                  :port 6667
+                  :nick   "Naokotani"
+                  :full-name "Chris Hughes")

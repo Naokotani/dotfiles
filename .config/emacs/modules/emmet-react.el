@@ -9,27 +9,28 @@
 
 (defun emmet-react-wrap-component ()
 	(interactive)
-	(let ((propList)
-				(propPos)
+	(let ((str (read-string "Enter component: "))
+				(propList)
+				(body (buffer-substring (region-end) (region-beginning)))
 				(component)
-				(body)
-				(str))
-		(setq str (read-string "comp: "))
+				(propPos))
 		(setq propList (split-string str "\\."))
 		(setq component (pop propList))
-		(setq body (buffer-substring (region-end) (region-beginning)))
-		(save-excursion
 		(delete-region (region-end) (region-beginning))
 		(insert (format "<%s" component))
+		(js-indent-line)
 		(while propList
 			(insert (format " %s=\"\""(pop propList)))
 			(if (not propPos)
-					(setq propPos (- (point) 500))))
+					(progn
+						(setq propPos (- (point) 1)))))
 		(insert ">\n")
 		(insert body)
-		(insert (format "</%s>\n" component)))
-		(pop-mark)
-		(goto-char (propPos))))
+		(insert (format "</%s>\n" component))
+		(web-mode-buffer-indent)
+		(cond ((eq evil-state 'visual) (evil-insert-state)))
+		(if propPos
+				(goto-char propPos))))
 
 (defun emmet-react-expand-wrap-component ()
 	(interactive)
@@ -57,6 +58,7 @@
 
 (defun emmet-react-insert-component (propList component)
 		(insert (format "<%s " component))
+		(js-indent-line)
 		(let ((propPos))
 			(while propList
 				(insert (format "%s=\"\" "(pop propList)))
@@ -68,6 +70,7 @@
 
 (defun emmet-react-insert-wrap-component (propList component)
 		(insert (format "<%s " component))
+		(js-indent-line)
 		(let ((propPos))
 			(while propList
 				(insert (format "%s=\"\" "(pop propList)))
