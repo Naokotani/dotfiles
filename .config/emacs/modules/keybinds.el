@@ -53,6 +53,10 @@ _o_ buffer other window _x_ kill buffer _s_cratch _m_essages"
 	("x" kill-buffer)
 	("s" (switch-to-buffer "*scratch*"))
 	("m" (switch-to-buffer "*Messages*"))
+  ("H" (nao/move-divider-left))
+  ("J" (nao/move-divider-down))
+  ("K" (nao/move-divider-up))
+  ("L" (nao/move-divider-right))
   ("q" nil))
 
 (defhydra hydra-window (:color red
