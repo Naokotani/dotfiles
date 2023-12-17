@@ -7,6 +7,10 @@
 (global-set-key (kbd "C-x b") 'consult-buffer)
 (global-set-key (kbd "M-w") 'hydra-window/body)
 (global-set-key (kbd "<f12>") 'nao/toggle-alpha-background)
+(global-set-key (kbd "<f8>") 'erc-switch-to-buffer)
+(global-set-key (kbd "C-x l") 'previous-buffer)
+(global-set-key (kbd "C-x h") 'next-buffer)
+(global-set-key (kbd "C-x j") 'hydra-buffer/body)
 
 ;; Allow Eat to handle pasting text
 (add-hook 'eat-mode-hook
@@ -35,6 +39,21 @@
 			(enlarge-window 1)))
 
 (use-package hydra)
+
+(defhydra hydra-buffer (:color red :hint nil)
+	"
+_j_ previous buffer _k_ last buffer _i_buffer _b_ switch buffer
+_o_ buffer other window _x_ kill buffer _s_cratch _m_essages"
+
+	("j" previous-buffer)
+	("k" next-buffer)
+	("i" ibuffer)
+	("b" consult-buffer)
+	("o" consult-buffer-other-window)
+	("x" kill-buffer)
+	("s" (switch-to-buffer "*scratch*"))
+	("m" (switch-to-buffer "*Messages*"))
+  ("q" nil))
 
 (defhydra hydra-window (:color red
                         :hint nil)
