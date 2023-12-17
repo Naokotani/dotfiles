@@ -58,3 +58,11 @@
 
 ;; Transparency
 (set-frame-parameter nil 'alpha-background 90)
+
+(defvar nao/alpha-background 90)
+
+(defun nao/toggle-alpha-background ()
+  "Toggle alpha-background between 90 and 100."
+  (interactive)
+  (setq nao/alpha-background (if (= nao/alpha-background 90) 100 90))
+  (set-frame-parameter nil 'alpha-background nao/alpha-background))

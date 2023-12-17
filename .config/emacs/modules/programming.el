@@ -40,9 +40,12 @@
   :hook ((sgml-mode . emmet-mode)
         (css-mode . emmet-mode)
         (web-mode . emmet-mode)
-        (js-mode . emmet-mode)))
+        (js-mode . emmet-mode)
+				(emmet-mode . emmet-react-mode)))
 
 (use-package web-mode
   :config
   (setq web-mode-code-indent-offset 2)
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
+
+(electric-pair-mode)
