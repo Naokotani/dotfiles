@@ -8,15 +8,11 @@
 (global-set-key (kbd "M-w") 'hydra-window/body)
 (global-set-key (kbd "<f12>") 'nao/toggle-alpha-background)
 
-;; Org mode keymaps
-(define-key org-mode-map (kbd "<mouse-3>") 'ispell-word)
-
 ;; Allow Eat to handle pasting text
 (add-hook 'eat-mode-hook
           (lambda ()
             (define-key evil-normal-state-local-map
                         (kbd "p") 'eat-yank)))
-
 
 (defun nao/move-divider-right ()
 		(if (windows-sharing-edge (selected-window) 'right)

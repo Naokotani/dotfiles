@@ -189,6 +189,7 @@
          ("C-c n I" . org-roam-node-insert-immediate) ; Insert highlighted word as node
          ("C-c n d" . org-roam-dailies-goto-today) ; open today's daily note
          :map org-mode-map
+				 ("<mouse-3>" . ispell-word)
          ("C-M-i" . completion-at-point)
          :map org-roam-dailies-map
          ;;Navigate org roam dailies
