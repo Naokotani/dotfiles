@@ -15,6 +15,6 @@
   (dashboard-setup-startup-hook))
 
 (erc-tls :server "irc.libera.chat"
-                  :port 6667
+                  :port 6697
                   :nick   "Naokotani"
                   :full-name "Chris Hughes")

@@ -48,4 +48,4 @@
   (setq web-mode-code-indent-offset 2)
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
 
-(electric-pair-mode
+(electric-pair-mode)
