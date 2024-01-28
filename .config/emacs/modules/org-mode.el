@@ -12,6 +12,8 @@
   :bind
   (("C-c a" . org-agenda)))
 
+(setq org-agenda-span 14)
+
 ;;basic defaults
 (setq org-hide-emphasis-markers t)     
 (setq org-startup-with-inline-images t)
@@ -54,7 +56,13 @@
         ;; Enables line wrapping
         (visual-line-mode 1))
 
-(setq org-agenda-files '("~/Documents/denote"))
+(setq org-agenda-files "~/Documents/denote/agenda")
+(setq org-capture-templates
+      '(("t" "Todo" entry (file+headline "~/Documents/denote/20230911T100446--todos__personal.org" "Unsorted")
+         "* TODO %?\n  %i\n  %a")))
+
+ (define-key global-map (kbd "C-c n t")
+  (lambda () (interactive) (org-capture nil "t")))
 
 
 (setq org-agenda-prefix-format '((agenda . " %i %?-12t% s")
@@ -94,12 +102,6 @@
 ("n" "Next Tasks"
     ((todo "NEXT"
     ((org-agenda-overriding-header "Next Tasks")))))
-
-;;View tasks based on tags
-;; ("W" "Work Tasks" tags-todo "+@work-@home-@Lock-@board")
-;; ("L" "Lockraid Tasks" tags-todo "+@Lock-@home-@work-@board")
-;; ("H" "Home Tasks" tags-todo "+@home-@Lock-@work-@board")
-;; ("B" "Home Tasks" tags-todo "+@board-@home-@Lock-@work")
 
 ;; Setup buffer to display workflow
 ("w" "Workflow Status"
@@ -141,12 +143,12 @@
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
   (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-level-1 nil :font "Inter" :height 200)
-  (set-face-attribute 'org-level-2 nil :font "Inter" :height 180)
-  (set-face-attribute 'org-level-3 nil :font "Inter" :height 160)
-  (set-face-attribute 'org-level-4 nil :font "Inter" :height 140)
-  (set-face-attribute 'org-level-5 nil :font "Inter" :height 140)
-  (set-face-attribute 'org-level-6 nil :font "Inter" :height 140)
+  (set-face-attribute 'org-level-1 nil :font "Lato" :height 240)
+  (set-face-attribute 'org-level-2 nil :font "Lato" :height 200)
+  (set-face-attribute 'org-level-3 nil :font "Lato" :height 180)
+  (set-face-attribute 'org-level-4 nil :font "Ebgaramond" :height 200)
+  (set-face-attribute 'org-level-5 nil :font "Ebgaramond" :height 200)
+  (set-face-attribute 'org-level-6 nil :font "Ebgaramond" :height 200)
   (set-face-attribute 'org-block-begin-line nil :font "Fira Code retina")
   (set-face-attribute 'org-table nil  :inherit 'fixed-pitch)
   (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
@@ -217,3 +219,19 @@
   (("C-c n c" . denote)
    ("C-c n o" . denote-open-or-create)
    ("C-c n l" . denote-link)))
+(add-to-list 'load-path "~/.config/emacs/lisp")
+(eval-after-load 'ox '(require 'ox-koma-letter))
+(eval-after-load 'ox-koma-letter
+  '(progn
+     (add-to-list 'org-latex-classes
+                  '("my-letter"
+                    "\\documentclass\{scrlttr2\}
+     \\usepackage[english]{babel}
+     \\setkomavar{frombank}{(1234)\\,567\\,890}
+     \[DEFAULT-PACKAGES]
+     \[PACKAGES]
+     \[EXTRA]"))
+
+     (setq org-koma-letter-default-class "my-letter")))
+(eval-after-load 'ox-latex
+  '(add-to-list 'org-latex-packages-alist '("AUTO" "babel" t) t))

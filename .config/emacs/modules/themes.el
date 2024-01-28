@@ -8,7 +8,7 @@
 (set-face-attribute 'fixed-pitch nil :font "Fira Code retina" :height nao/default-font-size)
 
 ;; Set the variable pitch face
-(set-face-attribute 'variable-pitch nil :font "NotoSerif" :height 140)
+(set-face-attribute 'variable-pitch nil :font "ebgaramond" :height 180)
 
 
 (setq modus-themes-italic-constructs t)                     ; Allows for the use of italic fonts
@@ -48,21 +48,63 @@
 		 ("C-M-`" . popper-toggle-type))
   :init
   (setq popper-reference-buffers
-		'("^\\*eshell.*\\*$" eshell-mode ;eshell as a popup
-		  "^\\*shell.*\\*$"  shell-mode  ;shell as a popup
-		  "^\\*term.*\\*$"   term-mode   ;term as a popup
-		  "^\\*vterm.*\\*$"  vterm-mode  ;vterm as a popup
-		  ))
+		'("^\\*eshell.*\\*$" eshell-mode 
+		  "^\\*shell.*\\*$"  shell-mode  
+		  "^\\*term.*\\*$"   term-mode   
+		  "^\\*vterm.*\\*$"  vterm-mode  
+		  "^\\*help.*\\*$"  help-mode  
+		  "^\\*ChatGPT.*\\*$"  chatgpt-mode  
+		  "^\\*rustfmt.*\\*$"    
+			compilation-mode))
   (popper-mode +1)
-  (popper-echo-mode +1))
+  (popper-echo-mode +1)
+	:config
+	(setq popper-display-control nil))
+
+;;Shackle for Popper
+(use-package shackle
+	:init
+	(shackle-mode 1)
+	:config
+	(setq shackle-default-rule '(:select t))
+	(setq shackle-rules
+				'(("^\\*Help.*\\*$"
+					 :regexp t
+					 :select t)
+					("^\\*eat.*\\*$"
+					 :regexp t
+					 :select t)
+					(compilation-mode
+					 :align below
+					 :size 0.4)
+					(eat-mode
+					 :select t)
+					("^\\*ChatGPT.*\\*$"
+					 :regexp t
+					 :select t))))
 
 ;; Transparency
 (set-frame-parameter nil 'alpha-background 90)
-
 (defvar nao/alpha-background 90)
 
 (defun nao/toggle-alpha-background ()
   "Toggle alpha-background between 90 and 100."
   (interactive)
-  (setq nao/alpha-background (if (= nao/alpha-background 90) 100 90))
+	(cond ((= nao/alpha-background 70) (setq nao/alpha-background 80))
+				((= nao/alpha-background 80) (setq nao/alpha-background 90))
+				((= nao/alpha-background 90) (setq nao/alpha-background 100))
+				((= nao/alpha-background 100) (setq nao/alpha-background 70)))
   (set-frame-parameter nil 'alpha-background nao/alpha-background))
+
+
+;;Use this to change the fringe for and background color
+(set-face-attribute 'fringe nil :background "#220c20" :foreground "#414a4c")
+
+(use-package doom-themes
+  :ensure t
+  :config
+  ;; Global settings (defaults)
+  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  
+(use-package minimap)

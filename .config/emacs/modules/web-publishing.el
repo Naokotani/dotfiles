@@ -11,3 +11,13 @@
 
 ;; Used to maintain syntax highlighting in html exports
 (use-package htmlize)
+
+(use-package webjump
+	:config
+  (setq webjump-sites
+        (append '(("Github" . "https://github.com/")
+                  ("Digital Ocean"   . "https://www.digitalocean.com/")
+                  ("Youtube"   . "https://www.youtube.com")
+                  ("Google"   . "https://www.google.com"))
+                webjump-sample-sites)))
+

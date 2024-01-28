@@ -9,8 +9,9 @@
   (dashboard-startup-banner 'logo)
   (dashboard-set-footer nil)
   (dashboard-banner-logo-title nil)
-  (dashboard-items '((recents  . 5)
-                       (agenda . 5)))
+  (dashboard-items '((projects . 5)
+                     (agenda . 5)
+										 (recents . 5)))
   :config
   (dashboard-setup-startup-hook))
 
@@ -29,3 +30,7 @@
       erc-track-exclude-types '("JOIN" "NICK" "QUIT" "MODE" "AWAY")
       erc-hide-list '("JOIN" "NICK" "QUIT" "MODE" "AWAY")
       erc-track-exclude-server-buffer t)
+
+(add-hook 'erc-mode-hook 
+          (lambda ()
+            (setq-local corfu-auto nil)))

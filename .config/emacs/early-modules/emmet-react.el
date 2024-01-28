@@ -105,7 +105,7 @@ the first prop."
 'propList' is a list of prop names and 'component' is a string that should
 be the name of a jsx component. After inserting, it will move to cursor to
 the first prop."
-		(insert (format "<%s " component))
+	(insert (format "<%s " component))
 		(js-indent-line)
 		(let ((propPos))
 			(while propList

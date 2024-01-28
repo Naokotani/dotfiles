@@ -74,6 +74,7 @@
   ;; Enable Corfu only for certain modes.
   :hook ((prog-mode . corfu-mode)
 	 (shell-mode . corfu-mode)
+	 (erc-mode . corfu-mode)
 	 (eshell-mode . corfu-mode))
 
   ;; Recommended: Enable Corfu globally.
@@ -247,3 +248,12 @@
   :straight t ; only need to install it, embark loads it after consult if found
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
+
+(use-package vertico-posframe
+	:config
+	(setq vertico-posframe-parameters
+      '((left-fringe . 8)
+        (right-fringe . 8)))
+	(set-face-background 'vertico-posframe "#220c20")
+	(setq vertico-posframe-mode 1))
+

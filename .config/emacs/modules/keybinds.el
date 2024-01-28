@@ -11,6 +11,20 @@
 (global-set-key (kbd "C-x l") 'previous-buffer)
 (global-set-key (kbd "C-x h") 'next-buffer)
 (global-set-key (kbd "C-x j") 'hydra-buffer/body)
+(global-set-key (kbd "C-c j") 'webjump)
+(global-set-key (kbd "C-c C-j") 'webjump)
+(global-set-key (kbd "M-j") 'nao/transpose-line-down)
+(global-set-key (kbd "M-k") 'nao/transpose-line-up)
+(define-key evil-window-map "u" 'winner-undo)
+(define-key evil-window-map "\C-u" 'winner-undo)
+(define-key evil-window-map "C-u" 'winner-undo)
+(define-key prog-mode-map (kbd "C-c C-o") 'browse-url-at-point)
+
+(defun my-org-agenda-mode-hook ()
+  (local-set-key (kbd "C-j") 'org-agenda-next-line)
+  (local-set-key (kbd "C-k") 'org-agenda-previous-line))
+
+(add-hook 'org-agenda-mode-hook 'my-org-agenda-mode-hook)
 
 ;; Allow Eat to handle pasting text
 (add-hook 'eat-mode-hook
@@ -100,3 +114,17 @@ Leaders: 'f' file 'b' buffer 'd' delete 't' Eat"
   ("db" kill-this-buffer)
   ("df" delete-frame :exit t)
   ("q" nil))
+
+
+(defun nao/transpose-line-down ()
+	"Transpose the current line down and move cusror to line where it moved"
+	(interactive)
+	(next-line 1)
+	(transpose-lines 1)
+	(previous-line 1))
+
+(defun nao/transpose-line-up ()
+	"Transpose the current line up and move cusror to line where it moved"
+	(interactive)
+	(transpose-lines 1)
+	(previous-line 2))

@@ -10,3 +10,6 @@
 
 ;; Emacs follows the working directory in Eat
 (setq eat-enable-directory-tracking t)
+
+(straight-use-package '(chatgpt
+  :host github :repo "joshcho/ChatGPT.el" :files ("dist" "*.el")))
