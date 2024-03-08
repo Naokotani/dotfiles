@@ -27,6 +27,9 @@
 		("js" . "src javascript")
 		("css" . "src css")
 		("sql" . "src sql")
+		("pu" . "src plantuml :file")
+		("rs" . "src rust")
+		("java" . "src java")
 		("html" . "src html")))
 
 (setq org-src-block-faces 
@@ -235,3 +238,18 @@
      (setq org-koma-letter-default-class "my-letter")))
 (eval-after-load 'ox-latex
   '(add-to-list 'org-latex-packages-alist '("AUTO" "babel" t) t))
+
+
+(use-package plantuml-mode)
+
+(setq org-plantuml-jar-path "/home/naokotani/src/plantuml.jar")
+(setq plantuml-jar-path "/home/naokotani/src/plantuml.jar")
+(add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+(setq plantuml-default-exec-mode 'jar)
+(org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
+(setq org-src-fontify-natively t
+      org-src-window-setup 'current-window ;; edit in current window
+      org-src-strip-leading-and-trailing-blank-lines t
+      org-src-preserve-indentation t ;; do not put two spaces on the left
+      org-src-tab-acts-natively t)
+

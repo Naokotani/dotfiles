@@ -2,6 +2,10 @@
 (use-package rainbow-delimiters
   :hook ((prog-mode . rainbow-delimiters-mode)))
 
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
+
 ;; Javascript setup
 ;Get Exec Path from bash shell
 (use-package exec-path-from-shell)
@@ -14,6 +18,11 @@
 (setq js-switch-indent-offset js-indent-level)
 (setq-default tab-width 2)
 (add-hook 'js-mode-hook (lambda () (setq tab-width 2)))
+(add-hook 'js-mode-hook 'eglot-ensure)
+(add-hook 'typescript-mode-hook 'eglot-ensure)
+
+(add-hook 'rust-mode-hook
+          (lambda () (set (make-local-variable 'compile-command) "npx tsc")))
 
 ;; Typescript
 (add-to-list 'auto-mode-alist '("\\.ts[x]?\\'" . tsx-ts-mode))
@@ -47,6 +56,13 @@
 (use-package web-mode
   :config
   (setq web-mode-code-indent-offset 2)
+  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode)))
 
 (electric-pair-mode)
@@ -64,6 +80,9 @@
 						(eglot-ensure)
 						(setq indent-tabs-mode nil)))
 
+(add-hook 'rust-mode-hook
+          (lambda () (set (make-local-variable 'compile-command) "cargo build")))
+
 
 (use-package yasnippet)
 (use-package yasnippet-snippets)
@@ -77,3 +96,10 @@
 (use-package svelte-mode)
 (add-to-list 'eglot-server-programs '((svelte-mode) "svelteserver" "--stdio"))
 (add-hook 'svelte-mode-hook 'eglot-ensure)
+
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (ansi-color-apply-on-region compilation-filter-start (point-max)))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
+(use-package yaml-pro)

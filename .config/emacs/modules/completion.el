@@ -70,6 +70,8 @@
   ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
   ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
   ;; (corfu-scroll-margin 5)        ;; Use scroll margin
+  (corfu-popupinfo-mode t)
+
 
   ;; Enable Corfu only for certain modes.
   :hook ((prog-mode . corfu-mode)
@@ -80,6 +82,8 @@
   ;; Recommended: Enable Corfu globally.
   ;; This is recommended since Dabbrev can be used globally (M-/).
   ;; See also `corfu-excluded-modes'.
+  :config
+  (setq corfu-popupinfo-delay '(1.0 0.2))
   :init
   (global-corfu-mode))
 
@@ -248,12 +252,3 @@
   :straight t ; only need to install it, embark loads it after consult if found
   :hook
   (embark-collect-mode . consult-preview-at-point-mode))
-
-(use-package vertico-posframe
-	:config
-	(setq vertico-posframe-parameters
-      '((left-fringe . 8)
-        (right-fringe . 8)))
-	(set-face-background 'vertico-posframe "#220c20")
-	(setq vertico-posframe-mode 1))
-

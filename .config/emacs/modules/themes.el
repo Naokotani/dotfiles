@@ -11,22 +11,28 @@
 (set-face-attribute 'variable-pitch nil :font "ebgaramond" :height 180)
 
 
-(setq modus-themes-italic-constructs t)                     ; Allows for the use of italic fonts
-(setq modus-themes-completions '(opinionated))              ; Completion theming mimics Ivy, Helm
-(setq modus-themes-tabs-accented t)                         ; Accent active tab
-(setq modus-themes-mode-line '(accented borderless padded)) ; Setup mode line theming
-(setq modus-themes-region '(bg-only))                       ; More Subtle selection background
-(setq modus-themes-paren-match '(bold intense))             ; Matching paren highlight stands out more
-(setq modus-themes-org-blocks 'tinted-background)           ; Allows for language specific org source block coloring
+;; (setq modus-themes-italic-constructs t)                     ; Allows for the use of italic fonts
+;; (setq modus-themes-completions '(opinionated))              ; Completion theming mimics Ivy, Helm
+;; (setq modus-themes-tabs-accented t)                         ; Accent active tab
+;; (setq modus-themes-mode-line '(accented borderless padded)) ; Setup mode line theming
+;; (setq modus-themes-region '(bg-only))                       ; More Subtle selection background
+;; (setq modus-themes-paren-match '(bold intense))             ; Matching paren highlight stands out more
+;; (setq modus-themes-org-blocks 'tinted-background)           ; Allows for language specific org source block coloring
 ;; Org heading face size
-(setq modus-themes-headings
-	'((1 . (rainbow bold 1.4))
-		(2 . (rainbow bold 1.3))
-		(3 . (rainbow bold 1.2))
-		(t . (semilight 1.1))))
+;; (setq modus-themes-headings
+;; 	'((1 . (rainbow bold 1.4))
+;; 		(2 . (rainbow bold 1.3))
+;; 		(3 . (rainbow bold 1.2))
+;; 		(t . (semilight 1.1))))
 
-(setq modus-themes-scale-headings t) ; Allow font scaling for headings
-(load-theme 'modus-vivendi t)        ; Load dark theme by default
+;; (setq modus-themes-scale-headings t) ; Allow font scaling for headings
+;; (load-theme 'modus-vivendi t)        ; Load dark theme by default
+
+(use-package ef-themes
+  :custom
+  (ef-themes-to-toggle '(ef-duo-dark ef-deuteranopia-light))
+  :config
+  (load-theme 'ef-duo-dark :no-confirm))
 
 ;; Load Doom mode line and display battery 
 (use-package doom-modeline
@@ -99,12 +105,3 @@
 
 ;;Use this to change the fringe for and background color
 (set-face-attribute 'fringe nil :background "#220c20" :foreground "#414a4c")
-
-(use-package doom-themes
-  :ensure t
-  :config
-  ;; Global settings (defaults)
-  (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  
-(use-package minimap)
