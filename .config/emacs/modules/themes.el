@@ -1,16 +1,5 @@
 ;;Faces sets default faces for variable pitch and fixed pitch as well as default text size
 
-;; Default face
-(defvar nao/default-font-size 120)
-(set-face-attribute 'default nil :font "Fira Code retina" :height nao/default-font-size)
-
-;; Set the fixed pitch face
-(set-face-attribute 'fixed-pitch nil :font "Fira Code retina" :height nao/default-font-size)
-
-;; Set the variable pitch face
-(set-face-attribute 'variable-pitch nil :font "ebgaramond" :height 180)
-
-
 ;; (setq modus-themes-italic-constructs t)                     ; Allows for the use of italic fonts
 ;; (setq modus-themes-completions '(opinionated))              ; Completion theming mimics Ivy, Helm
 ;; (setq modus-themes-tabs-accented t)                         ; Accent active tab

@@ -146,12 +146,12 @@
   ;; Ensure that anything that should be fixed-pitch in Org files appears that way
   (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
   (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-level-1 nil :font "Lato" :height 240)
-  (set-face-attribute 'org-level-2 nil :font "Lato" :height 200)
-  (set-face-attribute 'org-level-3 nil :font "Lato" :height 180)
-  (set-face-attribute 'org-level-4 nil :font "Ebgaramond" :height 200)
-  (set-face-attribute 'org-level-5 nil :font "Ebgaramond" :height 200)
-  (set-face-attribute 'org-level-6 nil :font "Ebgaramond" :height 200)
+  (set-face-attribute 'org-level-1 nil :font "NotoSefif" :height 240)
+  (set-face-attribute 'org-level-2 nil :font "NotoSefif" :height 200)
+  (set-face-attribute 'org-level-3 nil :font "NotoSefif" :height 180)
+  (set-face-attribute 'org-level-4 nil :font "NotoSefif" :height 200)
+  (set-face-attribute 'org-level-5 nil :font "NotoSefif" :height 200)
+  (set-face-attribute 'org-level-6 nil :font "NotoSefif" :height 200)
   (set-face-attribute 'org-block-begin-line nil :font "Fira Code retina")
   (set-face-attribute 'org-table nil  :inherit 'fixed-pitch)
   (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
@@ -179,32 +179,6 @@
 (add-hook 'org-mode-hook #'nao/org-mode-visual-fill) ; Display margins in Org buffers
 
 (use-package org-present)
-
-;; Org Roam is a Zeitelkasten method note taking package
-(use-package org-roam
-  :straight t
-  :demand t
-  :init
-  (setq org-roam-v2-ack t)
-  :custom
-  (org-roam-directory "~/org-roam") ; Tell Roam where to store files 
-  (org-roam-completion-everywhere t); Enagle Roam caputre template in all buffers
-  :bind (("C-c n f" . org-roam-node-find)     ; Find specific node, if it doesn't exist, create it
-         ("C-c n i" . org-roam-node-insert)   ; Insert link to a node
-         ("C-c n I" . org-roam-node-insert-immediate) ; Insert highlighted word as node
-         ("C-c n d" . org-roam-dailies-goto-today) ; open today's daily note
-         :map org-mode-map
-				 ("<mouse-3>" . ispell-word)
-         ("C-M-i" . completion-at-point)
-         :map org-roam-dailies-map
-         ;;Navigate org roam dailies
-         ("Y" . org-roam-dailies-capture-yesterday)
-         ("T" . org-roam-dailies-capture-tomorrow))
-  :bind-keymap
-  ("C-c n d" . org-roam-dailies-map)
-  :config
-  (require 'org-roam-dailies) ;; Ensure the keymap is available
-  (org-roam-db-autosync-mode))
 
 (use-package denote
   :config

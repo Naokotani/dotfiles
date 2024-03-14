@@ -1,3 +1,4 @@
+(use-package org)
 (use-package evil
   :init
   (setq evil-want-integration t)

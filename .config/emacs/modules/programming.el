@@ -6,12 +6,6 @@
 (setq-default tab-width 4)
 (setq indent-line-function 'insert-tab)
 
-;; Javascript setup
-;Get Exec Path from bash shell
-(use-package exec-path-from-shell)
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
-
 (use-package prettier-js)
 (setq js-jsx-indent-level 2)
 (setq js-indent-level 2)
