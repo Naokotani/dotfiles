@@ -4,8 +4,6 @@
 (use-package auctex
 	:ensure t)
 
-(require 'auctex)
-
 (setq org-export-date-timestamp-format "%B %d, %y")
 
 (setq TeX-view-program-selection
@@ -16,3 +14,8 @@
      (output-dvi "xdvi")
      (output-pdf "PDF Tools")
      (output-html "xdg-open")))
+
+(with-eval-after-load 'ob
+  ;; Optional for syntax highlight of napkin-puml src block.
+  ;; (require 'plantuml)
+  (use-package ob-napkin))
