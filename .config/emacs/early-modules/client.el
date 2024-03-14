@@ -2,7 +2,7 @@
   ;; Default face
   (defvar nao/default-font-size 120)
   (set-face-attribute 'default nil :font "Fira Code" :height nao/default-font-size)
-        
+
   ;; Set the fixed pitch face
   (set-face-attribute 'fixed-pitch nil :font "Fira Code" :height nao/default-font-size)
 
