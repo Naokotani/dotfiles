@@ -1,0 +1,9 @@
+(defsrc 
+caps
+lsft
+lctrl)
+
+(deflayer start
+lctrl
+lsft
+lctrl)
