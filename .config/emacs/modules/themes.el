@@ -23,6 +23,14 @@
   :config
   (load-theme 'ef-duo-dark :no-confirm))
 
+(setq ef-themes-headings
+      '((1 regular variable-pitch 5)
+        (2 regular variable-pitch 3)
+        (3 1.1)
+        (agenda-date 1.3)
+        (agenda-structure variable-pitch light 1.8)
+        (t variable-pitch)))
+
 ;; Load Doom mode line and display battery 
 (use-package doom-modeline
   :straight t
