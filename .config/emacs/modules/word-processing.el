@@ -6,6 +6,7 @@
 
 ;; Set spell checking to use the command line program hunspell
 (setq ispell-program-name "hunspell")
+(setq ispell-dictionary "en_CA")
 
 (defun nao/org-ispell-ignore ()
   "Configure `ispell-skip-region-alist' for `org-mode'."
