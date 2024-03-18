@@ -15,3 +15,8 @@ statusbar_bg = "#352487"
 cmdline = "light white"
 cmdline_bg = "black"
 search_match = "#d369af"
+
+# Use "Shift+q" to quit instead of the default "q"
+[keybindings]
+"Shift+q" = "quit"
+"q" = "noop"

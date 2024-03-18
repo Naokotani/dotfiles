@@ -23,4 +23,6 @@ lspconfig.rust_analyzer.setup {
         ['rust-analyzer'] = {},
     },
 }
+
+lspconfig.clangd.setup {}
 require("nao.lsp.handlers")

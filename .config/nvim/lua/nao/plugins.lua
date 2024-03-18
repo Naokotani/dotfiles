@@ -42,9 +42,10 @@ packer.init {
 return packer.startup(function(use)
     -- My plugins here
     use "wbthomason/packer.nvim" -- Have packer manage itself
-    use "nvim-lua/popup.nvim"  -- An implementation of the Popup API from vim in Neovim
-    use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
+    use "nvim-lua/popup.nvim"    -- An implementation of the Popup API from vim in Neovim
+    use "nvim-lua/plenary.nvim"  -- Useful lua functions used ny lots of plugins
     use "folke/tokyonight.nvim"
+    use "windwp/nvim-autopairs"
     use "xiyaowong/transparent.nvim"
     use {
         'w0rp/ale',
@@ -60,7 +61,7 @@ return packer.startup(function(use)
     use 'nvim-tree/nvim-web-devicons'
 
     -- snippets
-    use "L3MON4D3/LuaSnip"           --snippet engine
+    use "L3MON4D3/LuaSnip"             --snippet engine
     use "rafamadriz/friendly-snippets" -- a bunch of snippets to
 
     -- LSP and format
