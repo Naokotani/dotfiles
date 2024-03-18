@@ -1,10 +1,26 @@
-local status_ok, _ = pcall(require, "lspconfig")
+local status_ok, lspconfig = pcall(require, "lspconfig")
 if not status_ok then
-	return
+    return
 end
 
-require("nvim-lsp-installer").setup {}
-require'lspconfig'.pyright.setup{}
-require'lspconfig'.tsserver.setup{}
-require'lspconfig'.rust_analyzer.setup{}
+require("mason").setup {}
+require("mason-lspconfig").setup {}
+lspconfig.lua_ls.setup {
+    settings = {
+        Lua = {
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = { 'vim' },
+            },
+        },
+    },
+}
+lspconfig.pyright.setup {}
+lspconfig.tsserver.setup {}
+lspconfig.rust_analyzer.setup {
+    -- Server-specific settings. See `:help lspconfig-setup`
+    settings = {
+        ['rust-analyzer'] = {},
+    },
+}
 require("nao.lsp.handlers")
