@@ -1,4 +1,10 @@
-;; Rainbow brackets
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
+
 (use-package rainbow-delimiters
   :hook ((prog-mode . rainbow-delimiters-mode)))
 
@@ -13,13 +19,15 @@
 (setq-default tab-width 2)
 (add-hook 'js-mode-hook (lambda () (setq tab-width 2)))
 (add-hook 'js-mode-hook 'eglot-ensure)
-(add-hook 'typescript-mode-hook 'eglot-ensure)
+(add-hook 'typescript-ts-base-mode-hook 'eglot-ensure)
+(add-hook 'tsx-ts-mode-hook 'eglot-ensure)
 
 (add-hook 'rust-mode-hook
           (lambda () (set (make-local-variable 'compile-command) "npx tsc")))
 
 ;; Typescript
-(add-to-list 'auto-mode-alist '("\\.ts[x]?\\'" . tsx-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx?\\'" . tsx-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.ts?\\'" . typescript-ts-mode))
 
 ;; C setup
 (defun nao/c-mode-keybinds ()

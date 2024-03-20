@@ -25,4 +25,12 @@ lspconfig.rust_analyzer.setup {
 }
 
 lspconfig.clangd.setup {}
+lspconfig.cssls.setup {}
+lspconfig.html.setup {
+    filetypes = {
+        "html.mustache",
+        "mustache",
+    }
+}
+
 require("nao.lsp.handlers")

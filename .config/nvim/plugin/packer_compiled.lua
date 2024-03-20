@@ -79,15 +79,6 @@ _G.packer_plugins = {
     path = "/home/naokotani/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
-  ale = {
-    commands = { "ALEEnable" },
-    config = { "vim.cmd[[ALEEnable]]" },
-    loaded = false,
-    needs_bufread = true,
-    only_cond = false,
-    path = "/home/naokotani/.local/share/nvim/site/pack/packer/opt/ale",
-    url = "https://github.com/w0rp/ale"
-  },
   ["alpha-nvim"] = {
     config = { "\27LJ\2\nÉ\5\0\0\n\0 \1<6\0\0\0'\2\1\0B\0\2\0026\1\0\0'\3\2\0B\1\2\0026\2\0\0'\4\3\0B\2\2\0029\3\4\0019\3\5\3=\2\6\0039\3\4\0019\3\a\0034\4\a\0009\5\b\1'\a\t\0'\b\n\0'\t\v\0B\5\4\2>\5\1\0049\5\b\1'\a\f\0'\b\r\0'\t\14\0B\5\4\2>\5\2\0049\5\b\1'\a\15\0'\b\16\0'\t\17\0B\5\4\2>\5\3\0049\5\b\1'\a\18\0'\b\19\0'\t\20\0B\5\4\2>\5\4\0049\5\b\1'\a\21\0'\b\22\0'\t\23\0B\5\4\2>\5\5\0049\5\b\1'\a\24\0'\b\25\0'\t\26\0B\5\4\0?\5\0\0=\4\6\0039\3\27\0009\5\28\1B\3\2\0016\3\29\0009\3\30\3'\5\31\0B\3\2\1K\0\1\0N                autocmd FileType alpha setlocal nofoldenable\n            \bcmd\bvim\topts\nsetup\f:qa<CR>\22ó°©ˆ  > Quit NVIM\6q;:e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<CR>\20î˜•  > Settings\6s\28:Telescope oldfiles<CR>\18ïƒ…  > Recent\6r.:cd $HOME/code | Telescope find_files<CR>\16î«„  > Code\6c\30:Telescope find_files<CR>\21ï““  > File file\6f :ene <BAR> startinsert <CR>\20ï…›  > New file\6e\vbutton\fbuttons\bval\vheader\fsection\fnao.art\27alpha.themes.dashboard\nalpha\frequire\r€€À™\4\0" },
     loaded = true,
@@ -229,6 +220,11 @@ _G.packer_plugins = {
     path = "/home/naokotani/.local/share/nvim/site/pack/packer/start/transparent.nvim",
     url = "https://github.com/xiyaowong/transparent.nvim"
   },
+  ["vim-mustache-handlebars"] = {
+    loaded = true,
+    path = "/home/naokotani/.local/share/nvim/site/pack/packer/start/vim-mustache-handlebars",
+    url = "https://github.com/mustache/vim-mustache-handlebars"
+  },
   ["which-key.nvim"] = {
     config = { "\27LJ\2\nt\0\0\3\0\a\0\0156\0\0\0009\0\1\0+\1\2\0=\1\2\0006\0\0\0009\0\1\0)\1,\1=\1\3\0006\0\4\0'\2\5\0B\0\2\0029\0\6\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14which-key\frequire\15timeoutlen\ftimeout\6o\bvim\0" },
     loaded = true,
@@ -238,43 +234,14 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: alpha-nvim
-time([[Config for alpha-nvim]], true)
-try_loadstring("\27LJ\2\nÉ\5\0\0\n\0 \1<6\0\0\0'\2\1\0B\0\2\0026\1\0\0'\3\2\0B\1\2\0026\2\0\0'\4\3\0B\2\2\0029\3\4\0019\3\5\3=\2\6\0039\3\4\0019\3\a\0034\4\a\0009\5\b\1'\a\t\0'\b\n\0'\t\v\0B\5\4\2>\5\1\0049\5\b\1'\a\f\0'\b\r\0'\t\14\0B\5\4\2>\5\2\0049\5\b\1'\a\15\0'\b\16\0'\t\17\0B\5\4\2>\5\3\0049\5\b\1'\a\18\0'\b\19\0'\t\20\0B\5\4\2>\5\4\0049\5\b\1'\a\21\0'\b\22\0'\t\23\0B\5\4\2>\5\5\0049\5\b\1'\a\24\0'\b\25\0'\t\26\0B\5\4\0?\5\0\0=\4\6\0039\3\27\0009\5\28\1B\3\2\0016\3\29\0009\3\30\3'\5\31\0B\3\2\1K\0\1\0N                autocmd FileType alpha setlocal nofoldenable\n            \bcmd\bvim\topts\nsetup\f:qa<CR>\22ó°©ˆ  > Quit NVIM\6q;:e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<CR>\20î˜•  > Settings\6s\28:Telescope oldfiles<CR>\18ïƒ…  > Recent\6r.:cd $HOME/code | Telescope find_files<CR>\16î«„  > Code\6c\30:Telescope find_files<CR>\21ï““  > File file\6f :ene <BAR> startinsert <CR>\20ï…›  > New file\6e\vbutton\fbuttons\bval\vheader\fsection\fnao.art\27alpha.themes.dashboard\nalpha\frequire\r€€À™\4\0", "config", "alpha-nvim")
-time([[Config for alpha-nvim]], false)
 -- Config for: which-key.nvim
 time([[Config for which-key.nvim]], true)
 try_loadstring("\27LJ\2\nt\0\0\3\0\a\0\0156\0\0\0009\0\1\0+\1\2\0=\1\2\0006\0\0\0009\0\1\0)\1,\1=\1\3\0006\0\4\0'\2\5\0B\0\2\0029\0\6\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14which-key\frequire\15timeoutlen\ftimeout\6o\bvim\0", "config", "which-key.nvim")
 time([[Config for which-key.nvim]], false)
-
--- Command lazy-loads
-time([[Defining lazy-load commands]], true)
-pcall(vim.api.nvim_create_user_command, 'ALEEnable', function(cmdargs)
-          require('packer.load')({'ale'}, { cmd = 'ALEEnable', l1 = cmdargs.line1, l2 = cmdargs.line2, bang = cmdargs.bang, args = cmdargs.args, mods = cmdargs.mods }, _G.packer_plugins)
-        end,
-        {nargs = '*', range = true, bang = true, complete = function()
-          require('packer.load')({'ale'}, {}, _G.packer_plugins)
-          return vim.fn.getcompletion('ALEEnable ', 'cmdline')
-      end})
-time([[Defining lazy-load commands]], false)
-
-vim.cmd [[augroup packer_load_aucmds]]
-vim.cmd [[au!]]
-  -- Filetype lazy-loads
-time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType cmake ++once lua require("packer.load")({'ale'}, { ft = "cmake" }, _G.packer_plugins)]]
-vim.cmd [[au FileType html ++once lua require("packer.load")({'ale'}, { ft = "html" }, _G.packer_plugins)]]
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'ale'}, { ft = "markdown" }, _G.packer_plugins)]]
-vim.cmd [[au FileType c ++once lua require("packer.load")({'ale'}, { ft = "c" }, _G.packer_plugins)]]
-vim.cmd [[au FileType tex ++once lua require("packer.load")({'ale'}, { ft = "tex" }, _G.packer_plugins)]]
-vim.cmd [[au FileType vim ++once lua require("packer.load")({'ale'}, { ft = "vim" }, _G.packer_plugins)]]
-vim.cmd [[au FileType racket ++once lua require("packer.load")({'ale'}, { ft = "racket" }, _G.packer_plugins)]]
-vim.cmd [[au FileType sh ++once lua require("packer.load")({'ale'}, { ft = "sh" }, _G.packer_plugins)]]
-vim.cmd [[au FileType zsh ++once lua require("packer.load")({'ale'}, { ft = "zsh" }, _G.packer_plugins)]]
-vim.cmd [[au FileType bash ++once lua require("packer.load")({'ale'}, { ft = "bash" }, _G.packer_plugins)]]
-vim.cmd [[au FileType cpp ++once lua require("packer.load")({'ale'}, { ft = "cpp" }, _G.packer_plugins)]]
-time([[Defining lazy-load filetype autocommands]], false)
-vim.cmd("augroup END")
+-- Config for: alpha-nvim
+time([[Config for alpha-nvim]], true)
+try_loadstring("\27LJ\2\nÉ\5\0\0\n\0 \1<6\0\0\0'\2\1\0B\0\2\0026\1\0\0'\3\2\0B\1\2\0026\2\0\0'\4\3\0B\2\2\0029\3\4\0019\3\5\3=\2\6\0039\3\4\0019\3\a\0034\4\a\0009\5\b\1'\a\t\0'\b\n\0'\t\v\0B\5\4\2>\5\1\0049\5\b\1'\a\f\0'\b\r\0'\t\14\0B\5\4\2>\5\2\0049\5\b\1'\a\15\0'\b\16\0'\t\17\0B\5\4\2>\5\3\0049\5\b\1'\a\18\0'\b\19\0'\t\20\0B\5\4\2>\5\4\0049\5\b\1'\a\21\0'\b\22\0'\t\23\0B\5\4\2>\5\5\0049\5\b\1'\a\24\0'\b\25\0'\t\26\0B\5\4\0?\5\0\0=\4\6\0039\3\27\0009\5\28\1B\3\2\0016\3\29\0009\3\30\3'\5\31\0B\3\2\1K\0\1\0N                autocmd FileType alpha setlocal nofoldenable\n            \bcmd\bvim\topts\nsetup\f:qa<CR>\22ó°©ˆ  > Quit NVIM\6q;:e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<CR>\20î˜•  > Settings\6s\28:Telescope oldfiles<CR>\18ïƒ…  > Recent\6r.:cd $HOME/code | Telescope find_files<CR>\16î«„  > Code\6c\30:Telescope find_files<CR>\21ï““  > File file\6f :ene <BAR> startinsert <CR>\20ï…›  > New file\6e\vbutton\fbuttons\bval\vheader\fsection\fnao.art\27alpha.themes.dashboard\nalpha\frequire\r€€À™\4\0", "config", "alpha-nvim")
+time([[Config for alpha-nvim]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

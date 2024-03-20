@@ -14,3 +14,5 @@
   (add-to-list 'ispell-skip-region-alist '(org-property-drawer-re)))
 
 (add-hook 'org-mode-hook #'nao/org-ispell-ignore)
+
+(use-package csv-mode)

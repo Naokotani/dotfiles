@@ -41,18 +41,13 @@ packer.init {
 -- Install your plugins here
 return packer.startup(function(use)
     -- My plugins here
+    use "mustache/vim-mustache-handlebars"
     use "wbthomason/packer.nvim" -- Have packer manage itself
     use "nvim-lua/popup.nvim"    -- An implementation of the Popup API from vim in Neovim
     use "nvim-lua/plenary.nvim"  -- Useful lua functions used ny lots of plugins
     use "folke/tokyonight.nvim"
     use "windwp/nvim-autopairs"
     use "xiyaowong/transparent.nvim"
-    use {
-        'w0rp/ale',
-        ft = { 'sh', 'zsh', 'bash', 'c', 'cpp', 'cmake', 'html', 'markdown', 'racket', 'vim', 'tex' },
-        cmd = 'ALEEnable',
-        config = 'vim.cmd[[ALEEnable]]'
-    }
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
     use 'hrsh7th/cmp-path'
