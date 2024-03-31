@@ -12,8 +12,26 @@ rm hyprpaper.conf
 
 length=${#papers[@]}
 
-paper_one=${papers[$((1 + $RANDOM % $length - 1))]}
-paper_two=${papers[$((1 + $RANDOM % $length - 1))]}
+first=$((1 + $RANDOM % $length - 1))
+
+echo "${first}"
+
+function dif_random {
+  second=$((1 + $RANDOM % $length - 1))
+
+  if [ $1 -eq $second ]
+  then
+    dif_random "$1"
+  else
+    return $second
+  fi
+}
+
+dif_random "$first"
+second=$?
+
+paper_one=${papers[$first]}
+paper_two=${papers[$second]}
 
 echo "preload = /home/naokotani/Pictures/wallpapers/${paper_one}" >> hyprpaper.conf
 echo "preload = /home/naokotani/Pictures/wallpapers/${paper_two}" >> hyprpaper.conf
