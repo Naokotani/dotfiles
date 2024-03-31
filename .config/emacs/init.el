@@ -1,5 +1,6 @@
 ;; Set warning level
-;;(setq warning-minimum-level :emergency)
+(setq warning-minimum-level :emergency)
+;;(setq debug-on-error t)
 
 ;; Straight.el bootstrap
 (defvar bootstrap-version)
@@ -35,3 +36,7 @@
 		(find-lisp-find-files "~/.config/emacs/modules" "\\.el\\'"))
 
 (require 'cl-lib)
+
+;;disable splash screen and startup message
+(setq inhibit-startup-message t) 
+(setq initial-scratch-message nil)

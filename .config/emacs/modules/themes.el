@@ -43,49 +43,6 @@
 (use-package all-the-icons
   :straight t)
 
-;; Install popper to create pop up windows for shells/terminals
-(use-package popper
-  :straight t
-  :bind (("C-`"   . popper-toggle-latest)
-		 ("M-`"   . popper-cycle)
-		 ("C-M-`" . popper-toggle-type))
-  :init
-  (setq popper-reference-buffers
-		'("^\\*eshell.*\\*$" eshell-mode 
-		  "^\\*shell.*\\*$"  shell-mode  
-		  "^\\*term.*\\*$"   term-mode   
-		  "^\\*vterm.*\\*$"  vterm-mode  
-		  "^\\*help.*\\*$"  help-mode  
-		  "^\\*ChatGPT.*\\*$"  chatgpt-mode  
-		  "^\\*rustfmt.*\\*$"    
-			compilation-mode))
-  (popper-mode +1)
-  (popper-echo-mode +1)
-	:config
-	(setq popper-display-control nil))
-
-;;Shackle for Popper
-(use-package shackle
-	:init
-	(shackle-mode 1)
-	:config
-	(setq shackle-default-rule '(:select t))
-	(setq shackle-rules
-				'(("^\\*Help.*\\*$"
-					 :regexp t
-					 :select t)
-					("^\\*eat.*\\*$"
-					 :regexp t
-					 :select t)
-					(compilation-mode
-					 :align below
-					 :size 0.4)
-					(eat-mode
-					 :select t)
-					("^\\*ChatGPT.*\\*$"
-					 :regexp t
-					 :select t))))
-
 ;; Transparency
 (set-frame-parameter nil 'alpha-background 90)
 (defvar nao/alpha-background 90)
@@ -102,3 +59,29 @@
 
 ;;Use this to change the fringe for and background color
 (set-face-attribute 'fringe nil :background "#220c20" :foreground "#414a4c")
+
+(setq org-present-text-scale 3)
+(eval-after-load "org-present"
+  '(progn
+     (add-hook 'org-present-mode-hook
+               (lambda ()
+                 (org-present-big)
+                 (set-face-attribute 'org-block nil :inherit 'fixed-pitch :height 180)
+                 (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch) :height 180)
+                 (set-face-attribute 'org-verbatim nil   :inherit '(shadow fixed-pitch) :height 180)
+                 (set-face-attribute 'org-level-1 nil :font "Libre Baskerville" :height 300)
+                 (set-face-attribute 'org-level-2 nil :font "Libre Baskerville" :height 240)
+                 (org-display-inline-images)
+                 (org-present-hide-cursor)
+                 (org-present-read-only)))
+     (add-hook 'org-present-mode-quit-hook
+               (lambda ()
+                 (org-present-small)
+                 (org-remove-inline-images)
+                 (set-face-attribute 'org-level-1 nil :font "Libre Baskerville" :height 240)
+                 (set-face-attribute 'org-level-2 nil :font "Libre Baskerville" :height 200)
+                 (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch) :height 120)
+                 (set-face-attribute 'org-block nil :inherit 'fixed-pitch :height 120)
+                 (set-face-attribute 'org-verbatim nil   :inherit '(shadow fixed-pitch) :height 120)
+                 (org-present-show-cursor)
+                 (org-present-read-write)))))

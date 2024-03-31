@@ -20,3 +20,5 @@
   :after evil
   :config
   (evil-collection-init))
+
+(use-package avy)

@@ -6,14 +6,24 @@
   :custom
   (dashboard-set-heading-icons t)
   (dashboard-set-file-icons t)
-  (dashboard-startup-banner 'logo)
+  (dashboard-startup-banner "/home/naokotani/Pictures/anime/ahegaoinvert.png")
   (dashboard-set-footer nil)
   (dashboard-banner-logo-title nil)
   (dashboard-items '((projects . 5)
                      (agenda . 5)
-										 (recents . 5)))
+										 (recents . 5))
   :config
-  (dashboard-setup-startup-hook))
+  (dashboard-setup-startup-hook)))
+(dashboard-open)
+
+(setq dashboard-banner-ascii "
+███████╗███╗░░░███╗░█████╗░░█████╗░░██████╗
+██╔════╝████╗░████║██╔══██╗██╔══██╗██╔════╝
+█████╗░░██╔████╔██║███████║██║░░╚═╝╚█████╗░
+██╔══╝░░██║╚██╔╝██║██╔══██║██║░░██╗░╚═══██╗
+███████╗██║░╚═╝░██║██║░░██║╚█████╔╝██████╔╝
+╚══════╝╚═╝░░░░░╚═╝╚═╝░░╚═╝░╚════╝░╚═════╝░
+")
 
 (defun nao/irc-connect ()
 	(interactive)

@@ -11,7 +11,7 @@
 
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["cpu", "temperature", "memory", "backlight", "wireplumber"],
+    "modules-right": ["cpu", "temperature", "memory", "backlight", "pulseaudio"],
 
     // Modules configuration
     "hyprland/workspaces": {
@@ -132,15 +132,21 @@
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
-    "wireplumber": {
-    "format": "{volume}% {icon}",
-    "format-muted": "",
-    "format-icons": ["", "", ""]
-    },
-    "custom/power": {
-      "format": "{icon}",
-      "format-icons": "",// 󰣇
-      "exec-on-event": "true",
-      "on-click": "~/scripts/sessionMenu.sh",
-    }
+  "pulseaudio": {
+      "format": "{volume}% {icon}",
+      "format-bluetooth": "{volume}% {icon}",
+      "format-muted": "",
+      "format-icons": {
+          "headphone": "",
+          "hands-free": "",
+          "headset": "",
+          "phone": "",
+          "portable": "",
+          "car": "",
+          "default": ["", ""]
+      },
+      "scroll-step": 1,
+      "on-click": "pavucontrol",
+      "ignored-sinks": ["Easy Effects Sink"]
+  }
 }

@@ -1,10 +1,3 @@
-(use-package treesit-auto
-  :custom
-  (treesit-auto-install 'prompt)
-  :config
-  (treesit-auto-add-to-auto-mode-alist 'all)
-  (global-treesit-auto-mode))
-
 (use-package rainbow-delimiters
   :hook ((prog-mode . rainbow-delimiters-mode)))
 
@@ -19,22 +12,22 @@
 (setq-default tab-width 2)
 (add-hook 'js-mode-hook (lambda () (setq tab-width 2)))
 (add-hook 'js-mode-hook 'eglot-ensure)
-(add-hook 'typescript-ts-base-mode-hook 'eglot-ensure)
+(add-hook 'typescript-ts-mode-hook 'eglot-ensure)
 (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
 
 (add-hook 'rust-mode-hook
           (lambda () (set (make-local-variable 'compile-command) "npx tsc")))
 
 ;; Typescript
-(add-to-list 'auto-mode-alist '("\\.tsx?\\'" . tsx-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.ts?\\'" . typescript-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx?\\'" . tsx-mode))
+(add-to-list 'auto-mode-alist '("\\.ts?\\'" . typescript-mode))
 
 ;; C setup
 (defun nao/c-mode-keybinds ()
   (define-key c-mode-map (kbd "C-c m") 'compile))
-
-(add-hook 'c-mode 'eglot-ensure)
-(add-hook 'c-mode-hook #'nao/c-mode-keybinds)
+(add-to-list 'auto-mode-alist '("\\.c\\.h\\'" . c-ts-mode))
+(add-hook 'c-ts-mode 'eglot-ensure)
+(add-hook 'c-ts-mode-hook #'nao/c-mode-keybinds)
 
 ;; Java Setup
 (use-package eglot-java)
@@ -105,3 +98,37 @@
 (add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
 (use-package yaml-pro)
+
+
+(use-package tree-sitter)
+(use-package typescript-mode)
+(use-package tree-sitter-langs)
+(add-hook 'typescript-ts-mode-hook #'tree-sitter-mode)
+(add-to-list 'treesit-extra-load-path "/home/naokotani/src/tree-sitter-modules/dist")
+(setq rust-mode-treesitter-derive t)
+
+
+(setq treesit-language-source-alist
+   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+     (css "https://github.com/tree-sitter/tree-sitter-css")
+     (cmake "https://github.com/uyha/tree-sitter-cmake")
+     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+     (c "https://github.com/tree-sitter/tree-sitter-c")
+     (go "https://github.com/tree-sitter/tree-sitter-go")
+     (html "https://github.com/tree-sitter/tree-sitter-html")
+     (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+     (json "https://github.com/tree-sitter/tree-sitter-json")
+     (make "https://github.com/alemuller/tree-sitter-make")
+     (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+     (python "https://github.com/tree-sitter/tree-sitter-python")
+     (toml "https://github.com/tree-sitter/tree-sitter-toml")
+     (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+     (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+     (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+
+(use-package clojure-mode)
+(use-package cider)
+
+(use-package paredit)
+(add-hook 'clojure-mode-hook 'paredit-mode)
+(add-hook 'cider-mode-hook 'paredit-mode)

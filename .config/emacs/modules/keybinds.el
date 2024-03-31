@@ -15,6 +15,7 @@
 (global-set-key (kbd "C-c C-j") 'webjump)
 (global-set-key (kbd "M-j") 'nao/transpose-line-down)
 (global-set-key (kbd "M-k") 'nao/transpose-line-up)
+(global-set-key (kbd "C-'") 'evil-avy-goto-char-2)
 (define-key evil-window-map "u" 'winner-undo)
 (define-key evil-window-map "\C-u" 'winner-undo)
 (define-key evil-window-map "C-u" 'winner-undo)
