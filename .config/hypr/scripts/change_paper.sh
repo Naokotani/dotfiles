@@ -8,7 +8,7 @@ papers=(*.png)
 
 cd /home/naokotani/.config/hypr/
 
-rm hyprpaper.conf
+rm -f hyprpaper.conf
 
 length=${#papers[@]}
 
