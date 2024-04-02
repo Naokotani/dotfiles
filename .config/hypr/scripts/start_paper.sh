@@ -6,11 +6,10 @@ monitor2="DP-1"
 
 cd $dir
 
-papers=(*.png)
+papers=("${dir}"*.png)
 
 cd /home/naokotani/.config/hypr/
 
-rm -f hyprpaper.conf
 
 length=${#papers[@]}
 
@@ -27,7 +26,7 @@ function dif_random {
   fi
 }
 
-if [ $length > 1 ] 
+if [ $length -gt 1 ] 
 then
   dif_random "$first"
   second=$?
@@ -40,18 +39,18 @@ paper_two=${papers[$second]}
 
 if pgrep -x "hyprpaper" > /dev/null
 then
-  hyprctl hyprpaper wallpaper "${monitor1},${dir}${paper_one}"
-  hyprctl hyprpaper wallpaper "${monitor2},${dir}${paper_two}"
+  hyprctl hyprpaper wallpaper "${monitor1},${paper_one}"
+  hyprctl hyprpaper wallpaper "${monitor2},${paper_two}"
 else
-  for p in "$dir"*.png;
+  rm -f hyprpaper.conf
+  for p in "${papers[@]}";
   do
       echo "preload = ${p}" >> hyprpaper.conf
   done
 
-  echo "wallpaper = ${monitor1},${dir}${paper_one}" >>  hyprpaper.conf
-  echo "wallpaper = ${monitor2},${dir}${paper_two}" >> hyprpaper.conf
+  echo "wallpaper = ${monitor1},${paper_one}" >>  hyprpaper.conf
+  echo "wallpaper = ${monitor2},${paper_two}" >> hyprpaper.conf
 
   hyprpaper &
-  disown
 fi
 
