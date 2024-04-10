@@ -26,10 +26,9 @@
 
 (defvar-local my-modeline-buffer-name
     '(:eval
-      (when (mode-line-window-selected-p)
         (if (buffer-modified-p) 
             (propertize (my-modeline--buffer-name) 'face 'my-modeline-background-modified)
-          (propertize (my-modeline--buffer-name) 'face 'my-modeline-background))))
+          (propertize (my-modeline--buffer-name) 'face 'my-modeline-background)))
   "Mode line construct to display the buffer name.")
 
 (put 'my-modeline-buffer-name 'risky-local-variable t)
@@ -40,11 +39,12 @@
 
 (defvar-local my-modeline-major-mode
     '(:eval
-      (list
-       (propertize (my-modeline--major-mode-name) 'face 'bold)))
+      (when (mode-line-window-selected-p)
+       (if (eglot-managed-p)
+           (propertize (my-modeline--major-mode-name) 'face 'all-the-icons-green)
+           (propertize (my-modeline--major-mode-name) 'face 'all-the-icons-cyan))))
   "Mode line construct to display the major mode.")
 
 (put 'my-modeline-major-mode 'risky-local-variable t)
 
 (mode-line-window-selected-p)
-
