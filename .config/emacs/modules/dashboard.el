@@ -6,7 +6,7 @@
   :custom
   (dashboard-set-heading-icons t)
   (dashboard-set-file-icons t)
-  (dashboard-startup-banner "/home/naokotani/Pictures/anime/ahegaoinvert.png")
+  (dashboard-startup-banner 'ascii)
   (dashboard-set-footer nil)
   (dashboard-banner-logo-title nil)
   (dashboard-items '((projects . 5)
@@ -24,6 +24,7 @@
 ███████╗██║░╚═╝░██║██║░░██║╚█████╔╝██████╔╝
 ╚══════╝╚═╝░░░░░╚═╝╚═╝░░╚═╝░╚════╝░╚═════╝░
 ")
+
 
 (defun nao/irc-connect ()
 	(interactive)

@@ -46,3 +46,7 @@
 
 ;; Disable file locks since it's single user system this is not useful
 (setq create-lockfiles nil)
+
+(use-package 0x0)
+
+(setq dired-auto-revert-buffer t)

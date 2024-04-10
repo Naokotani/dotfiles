@@ -10,14 +10,13 @@
 
 (add-to-list 'TeX-view-program-list '("Zathura" "zathura %o"))
 
-(setq TeX-view-program-selection
-   '(((output-dvi has-no-display-manager)
-      "dvi2tty")
-     ((output-dvi style-pstricks)
-      "dvips and gv")
-     (output-dvi "xdvi")
-     (output-pdf "Zathura")
-     (output-html "xdg-open")))
+;; Use pdf-tools to open PDF files
+(setq TeX-view-program-selection '((output-pdf "PDF Tools"))
+      TeX-source-correlate-start-server t)
+
+;; Update PDF buffers after successful LaTeX runs
+(add-hook 'TeX-after-compilation-finished-functions
+           #'TeX-revert-document-buffer)
 
 (with-eval-after-load 'ob
   ;; Optional for syntax highlight of napkin-puml src block.

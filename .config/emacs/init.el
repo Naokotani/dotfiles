@@ -1,5 +1,5 @@
 ;; Set warning level
-(setq warning-minimum-level :emergency)
+;;(setq warning-minimum-level :emergency)
 ;;(setq debug-on-error t)
 
 ;; Straight.el bootstrap

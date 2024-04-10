@@ -3,7 +3,7 @@
   :init
   (setq evil-want-integration t)
   (setq evil-want-keybinding nil) ; Sets evil keybinds for other modes
-  (setq evil-want-C-u-scroll nil) ; Allows for the standard vim C-u  motion
+  (setq evil-want-C-u-scroll t) ; Allows for the standard vim C-u  motion
   (setq evil-want-C-i-jump nil) ; Disable default evil jump forward in jump list
   :config
   (evil-mode 1)

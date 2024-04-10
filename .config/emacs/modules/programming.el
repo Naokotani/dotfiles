@@ -12,7 +12,8 @@
 (setq-default tab-width 2)
 (add-hook 'js-mode-hook (lambda () (setq tab-width 2)))
 (add-hook 'js-mode-hook 'eglot-ensure)
-(add-hook 'typescript-ts-mode-hook 'eglot-ensure)
+(add-hook 'typecript-ts-mode-hook 'eglot-ensure)
+(add-hook 'typecript-ts-mode-hook (lambda () (setq tab-width 2)))
 (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
 
 (add-hook 'rust-mode-hook

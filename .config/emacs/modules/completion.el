@@ -230,7 +230,6 @@
 )
 
 ;; Embark
-
 (use-package embark
   :straight t
   :bind

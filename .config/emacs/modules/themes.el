@@ -1,25 +1,7 @@
-;;Faces sets default faces for variable pitch and fixed pitch as well as default text size
-
-;; (setq modus-themes-italic-constructs t)                     ; Allows for the use of italic fonts
-;; (setq modus-themes-completions '(opinionated))              ; Completion theming mimics Ivy, Helm
-;; (setq modus-themes-tabs-accented t)                         ; Accent active tab
-;; (setq modus-themes-mode-line '(accented borderless padded)) ; Setup mode line theming
-;; (setq modus-themes-region '(bg-only))                       ; More Subtle selection background
-;; (setq modus-themes-paren-match '(bold intense))             ; Matching paren highlight stands out more
-;; (setq modus-themes-org-blocks 'tinted-background)           ; Allows for language specific org source block coloring
-;; Org heading face size
-;; (setq modus-themes-headings
-;; 	'((1 . (rainbow bold 1.4))
-;; 		(2 . (rainbow bold 1.3))
-;; 		(3 . (rainbow bold 1.2))
-;; 		(t . (semilight 1.1))))
-
-;; (setq modus-themes-scale-headings t) ; Allow font scaling for headings
-;; (load-theme 'modus-vivendi t)        ; Load dark theme by default
-
 (use-package ef-themes
   :custom
   (ef-themes-to-toggle '(ef-duo-dark ef-deuteranopia-light))
+  (ef-themes-mixed-fonts)
   :config
   (load-theme 'ef-duo-dark :no-confirm))
 
@@ -30,14 +12,6 @@
         (agenda-date 1.3)
         (agenda-structure variable-pitch light 1.8)
         (t variable-pitch)))
-
-;; Load Doom mode line and display battery 
-(use-package doom-modeline
-  :straight t
-  :init (doom-modeline-mode 1)
-  ;;Add below if you want battery on laptop
-  :config
-  (display-battery-mode 1))
 
 ;;Install all the icons for integration into doom modeline and Dirvish
 (use-package all-the-icons
@@ -60,28 +34,28 @@
 ;;Use this to change the fringe for and background color
 (set-face-attribute 'fringe nil :background "#220c20" :foreground "#414a4c")
 
-(setq org-present-text-scale 3)
-(eval-after-load "org-present"
-  '(progn
-     (add-hook 'org-present-mode-hook
-               (lambda ()
-                 (org-present-big)
-                 (set-face-attribute 'org-block nil :inherit 'fixed-pitch :height 180)
-                 (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch) :height 180)
-                 (set-face-attribute 'org-verbatim nil   :inherit '(shadow fixed-pitch) :height 180)
-                 (set-face-attribute 'org-level-1 nil :font "Libre Baskerville" :height 300)
-                 (set-face-attribute 'org-level-2 nil :font "Libre Baskerville" :height 240)
-                 (org-display-inline-images)
-                 (org-present-hide-cursor)
-                 (org-present-read-only)))
-     (add-hook 'org-present-mode-quit-hook
-               (lambda ()
-                 (org-present-small)
-                 (org-remove-inline-images)
-                 (set-face-attribute 'org-level-1 nil :font "Libre Baskerville" :height 240)
-                 (set-face-attribute 'org-level-2 nil :font "Libre Baskerville" :height 200)
-                 (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch) :height 120)
-                 (set-face-attribute 'org-block nil :inherit 'fixed-pitch :height 120)
-                 (set-face-attribute 'org-verbatim nil   :inherit '(shadow fixed-pitch) :height 120)
-                 (org-present-show-cursor)
-                 (org-present-read-write)))))
+(winner-mode)
+
+(use-package spacious-padding)
+
+;; These is the default value, but I keep it here for visiibility.
+(setq spacious-padding-widths
+      '( :internal-border-width 20
+         :header-line-width 0
+         :tab-width 0
+         :left-fringe-width 20
+         :mode-line-width 0
+         :right-divider-width 0
+         :scroll-bar-width 0
+         :fringe-width 0))
+
+;; Read the doc string of `spacious-padding-subtle-mode-line' as it
+;; is very flexible and provides several examples.
+(setq spacious-padding-subtle-mode-line
+      `( :mode-line-active 'default
+         :mode-line-inactive vertical-border))
+
+(spacious-padding-mode 1)
+
+;; Set a key binding if you need to toggle spacious padding.
+(define-key global-map (kbd "<f8>") #'spacious-padding-mode)

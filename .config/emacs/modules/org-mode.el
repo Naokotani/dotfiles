@@ -141,23 +141,7 @@
   ;; Replace list hyphen with dot
   (font-lock-add-keywords 'org-mode
                           '(("^ *\\([-]\\) "
-                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-
-  ;; Ensure that anything that should be fixed-pitch in Org files appears that way
-  (set-face-attribute 'org-block nil :inherit 'fixed-pitch :height 120)
-  (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch) :height 120)
-  (set-face-attribute 'org-level-1 nil :font "Libre Baskerville" :height 240)
-  (set-face-attribute 'org-level-2 nil :font "Libre Baskerville" :height 200)
-  (set-face-attribute 'org-level-3 nil :font "Libre Baskerville" :height 180)
-  (set-face-attribute 'org-level-4 nil :font "Libre Baskerville" :height 200)
-  (set-face-attribute 'org-level-5 nil :font "Libre Baskerville" :height 200)
-  (set-face-attribute 'org-level-6 nil :font "Libre Baskerville" :height 200)
-  (set-face-attribute 'org-block-begin-line nil :font "Fira Code retina")
-  (set-face-attribute 'org-table nil  :inherit 'fixed-pitch)
-  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
-  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
-  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•")))))))
 
 ;;Org Bullets provides nicer bullets for Org Mode headers and lists
 (use-package org-bullets
@@ -227,30 +211,3 @@
       org-src-preserve-indentation t ;; do not put two spaces on the left
       org-src-tab-acts-natively t)
 
-(defun nao/markdown-font-setup()
-  (setq line-number-mode nil)
-  (set-face-attribute 'markdown-inline-code-face nil   :inherit '(shadow fixed-pitch) :height 120)
-  (set-face-attribute 'markdown-header-face-1 nil :font "Libre Baskerville" :height 240)
-  (set-face-attribute 'markdown-header-face-2 nil :font "Libre Baskerville" :height 200)
-  (set-face-attribute 'markdown-header-face-3 nil :font "Libre Baskerville" :height 180))
-
-(defun nao/markdown-mode-setup ()
-  (auto-fill-mode 1)
-  (display-line-numbers-mode 0)
-  ;; Allow variable pitch faces
-  (variable-pitch-mode 1))
-
-(defun nao/markdown-mode-visual-fill ()
-        (setq visual-fill-column-width 120
-              visual-fill-column-center-text t)
-        (visual-fill-column-mode 1))
-
-(use-package markdown-mode
-  :ensure t
-  :mode ("README\\.md\\'" . gfm-mode)
-  :init (setq markdown-command "multimarkdown"))
-
-
-(add-hook 'markdown-mode-hook #'nao/markdown-mode-setup)
-(add-hook 'markdown-mode-hook #'nao/markdown-font-setup)
-(add-hook 'markdown-mode-hook #'nao/markdown-mode-visual-fill)
