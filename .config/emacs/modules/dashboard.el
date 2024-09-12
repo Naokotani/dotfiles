@@ -45,3 +45,5 @@
 (add-hook 'erc-mode-hook 
           (lambda ()
             (setq-local corfu-auto nil)))
+
+(use-package elfeed-tube)

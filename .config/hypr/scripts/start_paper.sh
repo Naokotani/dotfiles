@@ -6,7 +6,7 @@ dir=$(cat "wallpapers_dir.conf")
 monitor1="eDP-1"
 monitor2="DP-1"
 
-cd $dir
+cd "/home/naokotani/Pictures/wallpapers/$dir"
 
 echo "$dir"
 

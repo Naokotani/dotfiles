@@ -1,9 +1,18 @@
-(defsrc 
-caps
-lsft
-lctrl)
+;; This is the default layout of my keyboard
+(defsrc
+esc  f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12 prtsc del
+grv   1  2  3  4  5  6  7  8  9  0  -   =       bspc pgup
+tab   q  w  e  r  t  y  u  i  o  p  [  ]  \          pgdn
+caps  a  s  d  f  g  h  j  k  l  ;  '  ret           home
+lsft  z  x  c  v  b  n  m  ,  .  /  rsft      up      end
+lctrl lmet lalt  spc ralt     rctrl     lft down rght     )
 
+
+;; This is the layout that will be loaded when kanata starts
 (deflayer start
-lctrl
-lsft
-lctrl)
+esc  f1 f2 f3 f4 f5 f6 f7 f8 f9 f10 f11 f12 prtsc del
+grv   1  2  3  4  5  6  7  8  9  0  -   =       bspc caps
+tab   q  w  e  r  t  y  u  i  o  p  [  ]  \          pgdn
+lctrl  a  s  d  f  g  h  j  k  l  ;  '  ret           home
+lsft  z  x  c  v  b  n  m  ,  .  /  rsft      up      end
+lctrl lmet lalt  spc pgup     pgdn     lft down rght     )

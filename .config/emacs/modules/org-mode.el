@@ -29,6 +29,8 @@
 		("sql" . "src sql")
 		("pu" . "src napkin-puml :file")
 		("rs" . "src rust")
+		("c" . "src c")
+		("c++" . "src c++")
 		("java" . "src java")
 		("html" . "src html")))
 
@@ -211,3 +213,8 @@
       org-src-preserve-indentation t ;; do not put two spaces on the left
       org-src-tab-acts-natively t)
 
+(require 'org)
+(require 'ob-clojure)
+(setq org-babel-clojure-backend 'cider)
+(require 'cider)
+(setq org-confirm-babel-evaluate nil)

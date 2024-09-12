@@ -70,7 +70,7 @@
   ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
   ;; (corfu-echo-documentation nil) ;; Disable documentation in the echo area
   ;; (corfu-scroll-margin 5)        ;; Use scroll margin
-  (corfu-popupinfo-mode t)
+  (corfu-popupinfo-mode nil)
 
 
   ;; Enable Corfu only for certain modes.
@@ -83,7 +83,7 @@
   ;; This is recommended since Dabbrev can be used globally (M-/).
   ;; See also `corfu-excluded-modes'.
   :config
-  (setq corfu-popupinfo-delay '(1.0 0.2))
+  (setq corfu-popupinfo-delay '(2.0 1.0))
   :init
   (global-corfu-mode))
 

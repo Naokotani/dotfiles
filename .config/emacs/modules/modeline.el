@@ -48,3 +48,16 @@
 (put 'my-modeline-major-mode 'risky-local-variable t)
 
 (mode-line-window-selected-p)
+
+(use-package git-gutter
+  :hook (prog-mode . git-gutter-mode)
+  :config
+  (setq git-gutter:update-interval 0.02))
+
+(use-package git-gutter-fringe
+  :config
+  (define-fringe-bitmap 'git-gutter-fr:added [0] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:modified [0] nil nil '(center repeated))
+  (define-fringe-bitmap 'git-gutter-fr:deleted [128 192 224 240] nil nil 'bottom))
+(setq git-gutter-fr:side 'right-fringe)
+(fringe-mode '(15 . 3))

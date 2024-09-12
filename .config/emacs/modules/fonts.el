@@ -88,6 +88,7 @@
                  (org-present-big)
                  (set-face-attribute 'org-block nil :inherit 'fixed-pitch :height 180)
                  (set-face-attribute 'org-code nil   :inherit '(shadow fixed-pitch) :height 180)
+                 (set-face-attribute 'org-table nil   :inherit '(shadow fixed-pitch) :height 180)
                  (set-face-attribute 'org-verbatim nil   :inherit '(shadow fixed-pitch) :height 180)
                  (set-face-attribute 'org-level-1 nil :font "Libre Baskerville" :height 300)
                  (set-face-attribute 'org-level-2 nil :font "Libre Baskerville" :height 240)

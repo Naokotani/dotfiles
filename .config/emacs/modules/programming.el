@@ -129,7 +129,7 @@
 
 (use-package clojure-mode)
 (use-package cider)
+(use-package clj-deps-new)
+(setq cider-shadow-default-options "app")
 
-(use-package paredit)
-(add-hook 'clojure-mode-hook 'paredit-mode)
-(add-hook 'cider-mode-hook 'paredit-mode)
+(use-package elpy)
