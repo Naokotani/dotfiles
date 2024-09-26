@@ -128,3 +128,16 @@ Leaders: 'f' file 'b' buffer 'd' delete 't' Eat"
 	(interactive)
 	(transpose-lines 1)
 	(previous-line 2))
+
+;; (use-package calc
+;;   :defer t)
+
+;; (use-package casual-suite
+;;   :ensure nil
+;;   :bind (:map
+;;          calc-mode-map
+;;          ("C-o" . casual-calc-tmenu)
+;;          :map
+;;          calc-alg-map
+;;          ("C-o" . casual-calc-tmenu))
+;;   :after (calc))

@@ -10,10 +10,10 @@
          :default-slant normal
          :default-height 120
 
-         :fixed-pitch-family nil
-         :fixed-pitch-weight nil
-         :fixed-pitch-slant nil
-         :fixed-pitch-height 1.0
+         :fixed-pitch-family "Fira Code retina"
+         :fixed-pitch-weight regular
+         :fixed-pitch-slant normal
+         :fixed-pitch-height 120
 
          :fixed-pitch-serif-family nil
          :fixed-pitch-serif-weight nil
@@ -79,6 +79,9 @@
 (set-face-attribute 'org-level-4 nil :height 200)
 (set-face-attribute 'org-level-5 nil :height 200)
 (set-face-attribute 'org-level-6 nil :height 200)
+(set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-code nil :inherit 'fixed-pitch)
+(set-face-attribute 'org-block nil :inherit 'fixed-pitch)
 
 (setq org-present-text-scale 3)
 (eval-after-load "org-present"

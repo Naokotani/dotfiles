@@ -133,3 +133,4 @@
 (setq cider-shadow-default-options "app")
 
 (use-package elpy)
+(use-package geiser-mit)
